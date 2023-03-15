@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins&display=swap');
+@import url('http://fonts.cdnfonts.com/css/gilroy-bold');
+@import url('http://fonts.cdnfonts.com/css/bahnschrift');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+  --Sniglet-font: "Sniglet", cursive;
+  --Oswald: 'Oswald', sans-serif;
+  --Rubik: "Rubik", cursive;
+  --Patua: "Patua One", cursive;
+  --Lobster: "lobster", cursive;
+  --Poppins: 'Poppins', sans-serif;
+  --Montserrat: 'Montserrat', sans-serif;
+  --DM-Serif: 'DM Serif Display', serif;
+  --Raleway: 'Raleway', sans-serif;
+  --main-bg: #131314;
+  --hero-section-color-one: #17181D;
+  --hero-section-color-two: #373A41;
+  --text-color: #ccad78;
+  --white: #FFFFFF;
+  --cards: #353840;
+}
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  background: var(--main-bg);
+  font-size: 1.6rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

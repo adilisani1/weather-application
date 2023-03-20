@@ -16,12 +16,13 @@
   --Montserrat: 'Montserrat', sans-serif;
   --DM-Serif: 'DM Serif Display', serif;
   --Raleway: 'Raleway', sans-serif;
-  --main-bg: #131314;
-  --hero-section-color-one: #17181D;
-  --hero-section-color-two: #373A41;
+  // --main-bg: #131314;
+  --hero-section-color-one: #323232;
+  --hero-section-color-two: #222226;
   --text-color: #ccad78;
   --white: #FFFFFF;
-  --cards: #353840;
+  --card-bg: #1E1E1E;
+
 }
 html {
   box-sizing: border-box;
@@ -45,3 +46,8 @@ body {
   margin: 0;
   padding: 0;
 }
+
+
+    // background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    // backdrop-filter: blur(10px);
+    // box-shadow: 0 10px 32px 0 rgb(0 0 0 / 40%);

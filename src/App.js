@@ -1,11 +1,10 @@
-
+import Header from "./component/Header";
+import Weather from "./component/Weather";
 function App() {
   return (
     <div className="App">
-
-
-      Learn React
-
+      <Header />
+      <Weather />
     </div>
   );
 }

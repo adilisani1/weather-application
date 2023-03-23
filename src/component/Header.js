@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.scss";
 
-const Header = (props) => {
+const Header = () => {
+
+    const [toggleTheme, setToggleTheme] = useState("dark");
+
+    const themeHandler = () => {
+        if (toggleTheme === "dark") {
+            setToggleTheme('light')
+        } else {
+            setToggleTheme('dark')
+        }
+    }
+
+    useEffect(() => {
+        document.body.className = toggleTheme;
+    }, [toggleTheme])
+
     return (
         <div className="container">
             <header className="header-wrap">
@@ -9,12 +24,12 @@ const Header = (props) => {
                     <div className="logo-area">
                         <img
                             className="logo-image"
-                            src="./images/logo/weather-logo.png"
+                            src="./images/logo/logo-weather.png"
                             alt="logo-img"
                         />
                         <div className="location-area">
-                            <ion-icon name="location-outline"></ion-icon>
-                            <span className="">Seattle, Australia</span>
+                            <ion-icon name="location-sharp"></ion-icon>
+                            <span className="location-top">Seattle, <span>Australia</span></span>
                         </div>
                     </div>
 
@@ -23,15 +38,33 @@ const Header = (props) => {
                         <input type="text" placeholder="Search city ..." className="search-input" />
                     </div>
 
-                    <div className="weather-temp">
-                        <span className="circle"></span>
-                        <span>°C</span>
-                        <span className="circle"></span>
-                        <span>°F</span>
+
+                    <div className="d-flex align-items-center justify-flex-end">
+                        <div className="weather-temp">
+                            <span className="circle active">
+                                °C
+                            </span>
+                            <span className="circle">
+                                °F
+                            </span>
+                        </div>
+
+                        <div className="form-check ">
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="checkbox"
+                                onChange={themeHandler} />
+                            <label className="form-check-label" for="checkbox">
+                                <ion-icon name="sunny-outline" class="sun"></ion-icon>
+                                <ion-icon name="moon-outline" class="moon"></ion-icon>
+                            </label>
+                        </div>
                     </div>
+
                 </div>
-            </header>
-        </div>
+            </header >
+        </div >
     );
 };
 

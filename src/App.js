@@ -4,7 +4,7 @@ import Weather from "./component/Weather";
 
 function App() {
 
-  const [searchWeather, setSearchWeather] = useState("Karachi");
+  const [searchWeather, setSearchWeather] = useState("toronto");
 
   return (
     <div className="App">

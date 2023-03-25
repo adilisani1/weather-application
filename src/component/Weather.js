@@ -3,8 +3,8 @@ import "./Weather.scss";
 import { apiKey } from "../weatherAPI/apiKey";
 
 const Weather = ({ searchWeather }) => {
-
     const [weatherData, setWeatherData] = useState([]);
+    const [time, setTime] = useState("");
 
     const getWeatherData = async () => {
         try {
@@ -40,9 +40,24 @@ const Weather = ({ searchWeather }) => {
             console.log(e);
         }
     };
+
     useEffect(() => {
         getWeatherData();
     }, []);
+
+    // const {
+    //     city,
+    //     country,
+    //     main,
+    //     temp,
+    //     feels_like,
+    //     temp_min,
+    //     temp_max,
+    //     humidity,
+    //     pressure,
+    //     sunrise,
+    //     sunset,
+    // } = weatherData;
 
     const calculateTime = (timezone) => {
         const date = new Date(Date.now() + timezone);
@@ -53,8 +68,15 @@ const Weather = ({ searchWeather }) => {
         return `${hours}:${minutes}:${seconds}`;
     };
 
-    const { timezone } = weatherData;
-    const time = calculateTime(timezone);
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTime(calculateTime(weatherData.timezone));
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, [weatherData]);
+
+
 
     return (
         <>

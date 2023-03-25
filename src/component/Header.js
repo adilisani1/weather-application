@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+
 import "./Header.scss";
 
-const Header = () => {
+const Header = (props) => {
 
     const [toggleTheme, setToggleTheme] = useState("dark");
-
     const themeHandler = () => {
         if (toggleTheme === "dark") {
             setToggleTheme('light')
@@ -34,10 +34,17 @@ const Header = () => {
                     </div>
 
                     <div className="search-box">
-                        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-                        <input type="text" placeholder="Search city ..." className="search-input" />
+                        <ion-icon name="search-outline" class="search-icon" onClick={() => props.getWeather()}></ion-icon>
+                        <input
+                            type="search"
+                            id="search"
+                            autoFocus
+                            placeholder="Search city ..."
+                            className="search-input"
+                            value={props.searchWeather}
+                            onChange={(e) => props.setSearchWeather(e.target.value)}
+                        />
                     </div>
-
 
                     <div className="d-flex align-items-center justify-flex-end">
                         <div className="weather-temp">
@@ -55,7 +62,7 @@ const Header = () => {
                                 type="checkbox"
                                 id="checkbox"
                                 onChange={themeHandler} />
-                            <label className="form-check-label" for="checkbox">
+                            <label className="form-check-label" htmlFor="checkbox">
                                 <ion-icon name="sunny-outline" class="sun"></ion-icon>
                                 <ion-icon name="moon-outline" class="moon"></ion-icon>
                             </label>

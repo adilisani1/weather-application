@@ -1,83 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Weather.scss";
-import { apiKey } from "../weatherAPI/apiKey";
 
-const Weather = ({ searchWeather }) => {
-    const [weatherData, setWeatherData] = useState([]);
-    const [time, setTime] = useState("");
-
-    const getWeatherData = async () => {
-        try {
-            const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?q=${searchWeather}&lat=57&lon=-2.15&appid=${apiKey}&units=metric&units=imperial`
-            );
-            const data = await response.json();
-            const { main } = data.weather[0];
-            const { humidity, temp, feels_like, pressure, temp_min, temp_max } =
-                data.main;
-            const { sunrise, sunset, country } = data.sys;
-            const timezone = data.timezone * 1000;
-            const city = data.name;
-            const date = data.dt;
-
-            const weatherInfo = {
-                main,
-                humidity,
-                temp,
-                feels_like,
-                pressure,
-                temp_min,
-                temp_max,
-                sunrise,
-                sunset,
-                timezone,
-                date,
-                city,
-                country,
-            };
-            setWeatherData(weatherInfo);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    useEffect(() => {
-        getWeatherData();
-    }, []);
-
-    // const {
-    //     city,
-    //     country,
-    //     main,
-    //     temp,
-    //     feels_like,
-    //     temp_min,
-    //     temp_max,
-    //     humidity,
-    //     pressure,
-    //     sunrise,
-    //     sunset,
-    // } = weatherData;
-
-    const calculateTime = (timezone) => {
-        const date = new Date(Date.now() + timezone);
-        const hours = date.getUTCHours().toString().padStart(2, "0");
-        const minutes = date.getUTCMinutes().toString().padStart(2, "0");
-        const seconds = date.getUTCSeconds().toString().padStart(2, "0");
-
-        return `${hours}:${minutes}:${seconds}`;
-    };
-
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setTime(calculateTime(weatherData.timezone));
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, [weatherData]);
-
-
-
+const Weather = ({ weatherData, time, weatherState }) => {
     return (
         <>
             <section className="weather-section">
@@ -86,7 +10,7 @@ const Weather = ({ searchWeather }) => {
                         <div className="col-md-6">
                             <div className="time-date">
                                 <span className="time">{time}</span>
-                                <p>Saturday | {new Date().toLocaleDateString()}</p>
+                                <p>Sunday | {new Date().toLocaleDateString()}</p>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -109,9 +33,10 @@ const Weather = ({ searchWeather }) => {
                                         <div className="head-icon-img">
                                             <img
                                                 className="icon-img"
-                                                src="/images/weather-icons/heavy-rain.svg"
+                                                src={weatherState}
                                                 alt=""
                                             />
+
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +51,7 @@ const Weather = ({ searchWeather }) => {
                     <div className="col-md-2 img-card">
                         <div className="card-shadow">
                             <div className="card-body">
-                                <h5 className="day">27 SUN</h5>
+                                <h5 className="day">27 MON</h5>
                             </div>
                             <div className="icon-img">
                                 <img
@@ -145,7 +70,7 @@ const Weather = ({ searchWeather }) => {
                     <div className="col-md-2 img-card">
                         <div className="card-shadow">
                             <div className="card-body">
-                                <h5 className="day">28 MON</h5>
+                                <h5 className="day">28 TUE</h5>
                             </div>
                             <div className="icon-img">
                                 <img
@@ -164,7 +89,7 @@ const Weather = ({ searchWeather }) => {
                     <div className="col-md-2 img-card">
                         <div className="card-shadow">
                             <div className="card-body">
-                                <h5 className="day">28 MON</h5>
+                                <h5 className="day">29 WED</h5>
                             </div>
                             <div className="icon-img">
                                 <img
@@ -183,7 +108,7 @@ const Weather = ({ searchWeather }) => {
                     <div className="col-md-2 img-card">
                         <div className="card-shadow">
                             <div className="card-body">
-                                <h5 className="day">28 MON</h5>
+                                <h5 className="day">30 THU</h5>
                             </div>
                             <div className="icon-img">
                                 <img
@@ -202,7 +127,7 @@ const Weather = ({ searchWeather }) => {
                     <div className="col-md-2 img-card">
                         <div className="card-shadow">
                             <div className="card-body">
-                                <h5 className="day">28 MON</h5>
+                                <h5 className="day">31 FRI</h5>
                             </div>
                             <div className="icon-img">
                                 <img
@@ -210,6 +135,7 @@ const Weather = ({ searchWeather }) => {
                                     src="/images/weather-icons/cloud.svg"
                                     alt="Card image cap"
                                 />
+
                             </div>
                             <div className="card-body">
                                 <h5 className="deg-feel">18° / 23°</h5>
@@ -221,7 +147,7 @@ const Weather = ({ searchWeather }) => {
                     <div className="col-md-2 img-card">
                         <div className="card-shadow">
                             <div className="card-body">
-                                <h5 className="day">28 MON</h5>
+                                <h5 className="day">01 SAT</h5>
                             </div>
                             <div className="icon-img">
                                 <img
@@ -229,6 +155,7 @@ const Weather = ({ searchWeather }) => {
                                     src="/images/weather-icons/clear.svg"
                                     alt="Card image cap"
                                 />
+
                             </div>
                             <div className="card-body">
                                 <h5 className="deg-feel">18° / 23°</h5>

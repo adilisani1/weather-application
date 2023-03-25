@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import "./Header.scss";
-
-const Header = (props) => {
+const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }) => {
 
     const [toggleTheme, setToggleTheme] = useState("dark");
     const themeHandler = () => {
@@ -29,29 +27,29 @@ const Header = (props) => {
                         />
                         <div className="location-area">
                             <ion-icon name="location-sharp"></ion-icon>
-                            <span className="location-top">Seattle, <span>Australia</span></span>
+                            <span className="location-top">{weatherData.city} <span>{weatherData.country}</span></span>
                         </div>
                     </div>
 
                     <div className="search-box">
-                        <ion-icon name="search-outline" class="search-icon" onClick={() => props.getWeather()}></ion-icon>
+                        <ion-icon name="search-outline" class="search-icon" onClick={() => getWeatherData()}></ion-icon>
                         <input
                             type="search"
                             id="search"
                             autoFocus
                             placeholder="Search city ..."
                             className="search-input"
-                            value={props.searchWeather}
-                            onChange={(e) => props.setSearchWeather(e.target.value)}
+                            value={searchWeather}
+                            onChange={(e) => setSearchWeather(e.target.value)}
                         />
                     </div>
 
                     <div className="d-flex align-items-center justify-flex-end">
                         <div className="weather-temp">
-                            <span className="circle active">
+                            <span className="circle ">
                                 °C
                             </span>
-                            <span className="circle">
+                            <span className="circle active">
                                 °F
                             </span>
                         </div>

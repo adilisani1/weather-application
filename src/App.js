@@ -4,6 +4,15 @@ import Header from "./component/Header";
 import Weather from "./component/Weather";
 import clear from "./image/clear.svg";
 import cloud from "./image/cloud.svg";
+import overcast from "./image/overcast.svg";
+import sunny from './image/sunny.svg';
+import moderaterain from './image/moderate-rain.svg';
+import heavyrain from './image/heavy-rain.svg';
+import lightrain from './image/light-rain.svg';
+import smoke from './image/smoke.png';
+import snow from './image/snow.svg';
+// import haze from './image/haze.svg';
+
 function App() {
 
   const [searchWeather, setSearchWeather] = useState("karachi");
@@ -11,14 +20,18 @@ function App() {
   const [weatherState, setWeatherState] = useState("");
   const [time, setTime] = useState("");
 
+
+
+
+
   const getWeatherData = async () => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchWeather}&lat=57&lon=-2.15&appid=${apiKey}&units=metric&units=imperial`
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchWeather}&lat=57&lon=-2.15&appid=${apiKey}&units=metric&units=imperial&forecast?`
       );
 
       const data = await response.json();
-      const { main } = data.weather[0];
+      const { main, description } = data.weather[0];
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } =
         data.main;
       const { sunrise, sunset, country } = data.sys;
@@ -28,6 +41,7 @@ function App() {
 
       const weatherInfo = {
         main,
+        description,
         humidity,
         temp,
         feels_like,
@@ -42,9 +56,11 @@ function App() {
         country,
       };
       setWeatherData(weatherInfo);
+      setSearchWeather("");
     } catch (e) {
       console.log(e);
     }
+
   };
 
   useEffect(() => {
@@ -55,7 +71,6 @@ function App() {
     const date = new Date(Date.now() + timezone);
     const hours = date.getUTCHours().toString().padStart(2, "0");
     const minutes = date.getUTCMinutes().toString().padStart(2, "0");
-    // const seconds = date.getUTCSeconds().toString().padStart(2, "0");
 
     return `${hours}:${minutes}`;
   };
@@ -68,31 +83,61 @@ function App() {
     return () => clearInterval(intervalId);
   }, [weatherData]);
 
-  const { main } = weatherData;
-
-
   useEffect(() => {
-    if (main) {
-      switch (main) {
-        case "Clear": setWeatherState(clear)
-          break;
-        case "Clouds": setWeatherState(cloud)
-          break;
-        default:
-          break;
+    switch (weatherData.main) {
+      case "Clear": {
+        const date = new Date(Date.now() + weatherData.timezone);
+        const hours = date.getUTCHours();
+        setWeatherState(hours >= 6 && hours <= 18 ? sunny : clear);
+        break;
+      }
+      case "Clouds": {
+        if (weatherData.description === "overcast clouds") {
+          setWeatherState(overcast);
+        } else {
+          setWeatherState(cloud);
+        }
+        break;
+      }
+      case "Smoke": {
+        setWeatherState(smoke);
+        break;
+      }
+      case "Snow": {
+        setWeatherState(snow);
+        break;
+      }
+      case "Rain": {
+        if (weatherData.description === "light rain") {
+          setWeatherState(lightrain);
+        } else if (weatherData.description === "moderate rain") {
+          setWeatherState(moderaterain);
+        } else {
+          setWeatherState(heavyrain);
+        }
+        break;
+      }
+
+      // case "Haze": {
+      //   setWeatherState(haze);
+      //   break;
+      // }
+
+      default: {
+        setWeatherState("");
       }
     }
-  }, [main]);
+  }, [weatherData]);
+
 
   return (
     <div className="App">
-
       <Header
         searchWeather={searchWeather}
         setSearchWeather={setSearchWeather}
         getWeatherData={getWeatherData}
-        weatherData={weatherData} />
-
+        weatherData={weatherData}
+      />
       <Weather
         time={time}
         weatherData={weatherData}

@@ -3,6 +3,7 @@ import "./Header.scss";
 const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }) => {
 
     const [toggleTheme, setToggleTheme] = useState("dark");
+
     const themeHandler = () => {
         if (toggleTheme === "dark") {
             setToggleTheme('light')
@@ -10,6 +11,7 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
             setToggleTheme('dark')
         }
     }
+
 
     useEffect(() => {
         document.body.className = toggleTheme;
@@ -34,7 +36,7 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
                     <div className="search-box">
                         <ion-icon name="search-outline" class="search-icon" onClick={() => getWeatherData()}></ion-icon>
                         <input
-                            type="search"
+                            type="text"
                             id="search"
                             autoFocus
                             placeholder="Search city ..."
@@ -46,12 +48,14 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
 
                     <div className="d-flex align-items-center justify-flex-end">
                         <div className="weather-temp">
-                            <span className="circle ">
+                            {/* <span className="deg">{parseInt(displayedTemp)}°</span> */}
+                            <span className="circle active">
                                 °C
                             </span>
-                            <span className="circle active">
+                            <span className="circle ">
                                 °F
                             </span>
+
                         </div>
 
                         <div className="form-check ">

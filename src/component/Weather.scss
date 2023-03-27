@@ -9,7 +9,7 @@
   height: 100%;
   background-position: center center;
   background-repeat: no-repeat;
-  padding: 60px 0px 10px 0px;
+  padding: 30px 0px 10px 0px;
   // background-color: #101014;
 
   .time-date {
@@ -18,50 +18,56 @@
 
     .time {
       font-size: 9rem;
-     font-family: var(--AgudaBlackUnicase);
+      font-family: var(--AgudaBlackUnicase);
     }
-    p{
-      margin:0;
-        font-size: 2rem;
-        font-family: var(--Gilroy);
-       letter-spacing: .7px;
+    p {
+      margin: 0;
+      font-size: 2rem;
+      font-family: var(--Gilroy);
+      letter-spacing: 0.7px;
     }
   }
 
   .weather-card {
     color: #ffff;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-      // backdrop-filter: blur(10px);
-      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 10%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0)
+    );
+    // backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 10%);
     border-radius: 20px;
 
-
     .loc {
-       border-top-left-radius: 20px;
-       border-top-right-radius: 20px;
-        width: 100%;
-        padding: 1.5rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-        // backdrop-filter: blur(10px);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        .location-name {
-          font-size: 1.6rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      width: 100%;
+      padding: 1.5rem;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0)
+      );
+      // backdrop-filter: blur(10px);
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      .location-name {
+        font-size: 1.6rem;
+        font-family: var(--Gilroy);
+        font-weight: 600;
+        margin-left: 1.2rem;
+        letter-spacing: 0.7px;
+        span {
           font-family: var(--Gilroy);
-            font-weight: 600;
-          margin-left: 1.2rem;
-          letter-spacing: .7px;
-          span {
-              font-family: var(--Gilroy);
-              font-weight: 400;
-            }
+          font-weight: 400;
         }
       }
+    }
 
     .weather-card-body {
-        padding: 2rem 4rem;
-        // width: 700px;
-        height: 250px;
-         
+      padding: 2rem 4rem;
+      // width: 700px;
+      height: 250px;
 
       .weather-card-info {
         display: flex;
@@ -69,141 +75,237 @@
         flex-direction: wrap;
         justify-content: center;
         margin: 0rem 1.4rem;
-       
+
         div {
           flex: 1;
+            width: 100%;
 
-            .deg {
-                font-size: 6rem;
-                text-align: center;
-                margin-bottom: 0;
-                font-family: var(--AgudaBlackUnicase);
-            
-              }
+          .deg {
+            font-size: 6rem;
+            text-align: center;
+            margin-bottom: 0;
+            font-family: var(--AgudaBlackUnicase);
+          }
 
           .info {
-                  font-size: 1.5rem;
-                  font-family: var(--Gilroy);
-                  letter-spacing: .7px;
-                }
+            font-size: 1.5rem;
+            font-family: var(--Gilroy);
+            letter-spacing: 0.7px;
+          }
         }
 
         .head-icon-img {
           .icon-img {
-            width:75%;
+            width: 75%;
           }
         }
       }
-    } 
+    }
   }
- }
+}
 
+.img-card {
 
-    .card-shadow {
-      position: relative;
-      padding: 3rem;
-      height: 250px;
-      
-      &:before {
-        content: '';
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        color: #ffff;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-        box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 10%);
-        z-index: -1;
-        border-radius: 15px;
-      }
-      
-      .icon-img{
-        display: flex;
-        align-items: center;
-        justify-content:center;
-        .icons{
-          width:70px;
-        }
-     }
-     .card-body {
-      padding: 1rem ;
-      color:white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center; /* vertically center the text */
-    .day{
+ 
+
+.forecast-card {
+  position: relative;
+  padding: 3rem;
+  height: 230px;
+  width: 200px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    color: #ffff;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0)
+    );
+    box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 10%);
+    z-index: -1;
+    border-radius: 15px;
+  }
+
+  .icon-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icons {
+      width: 70px;
+    }
+  }
+  .card-body {
+    padding: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertically center the text */
+    .day {
       font-family: var(--Gilroy);
       letter-spacing: 1.5px;
       font-size: 1.5rem;
       font-weight: 500;
     }
-    .deg-feel{
+    .deg-feel {
       font-family: var(--AgudaBlackUnicase);
       letter-spacing: 1.5px;
       font-size: 2rem;
       margin-left: 1rem;
     }
-    .stats{
+    .stats {
       font-family: var(--Gilroy);
       font-size: 1.2rem;
       letter-spacing: 1.5px;
     }
-    .rain-chance{
-font-family: var(--Gilroy);
-font-size: 1.4rem;
-letter-spacing: 1.5px;
+    .rain-chance {
+      font-family: var(--Gilroy);
+      font-size: 1.4rem;
+      letter-spacing: 1.5px;
     }
-       p {
-        margin: 0; /* remove default margins */
+    p {
+      margin: 0; /* remove default margins */
+    }
+  }
+  .weather-highlights {
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    .weather-condition-title {
+      font-size: 2rem;
+      font-family: var(--Gilroy);
+      letter-spacing: 0.9px;
+      font-weight: 400;
+      color: white;
+    }
+
+    .wind-speed {
+      font-size: 4rem;
+      font-family: var(--Gilroy);
+      font-weight: 400;
+      letter-spacing: 0.9px;
+      margin: 3rem 0;
+
+      .km {
+        font-size: 2rem;
       }
     }
+
+    .speed-text {
+    }
+  }
+}
+
+.card-collection{
+  position: relative;
+  padding: 3rem;
+  height: 230px;
+  // width: 300px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    color: #ffff;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0)
+    );
+    box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 10%);
+    z-index: -1;
+    border-radius: 15px;
+  }
+    .icon-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .icons {
+        width: 70px;
+      }
+    }
+  
+    .card-body {
+      padding: 1rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  
+      /* vertically center the text */
+      .day {
+        font-family: var(--Gilroy);
+        letter-spacing: 1.5px;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+  
+      .deg-feel {
+        font-family: var(--AgudaBlackUnicase);
+        letter-spacing: 1.5px;
+        font-size: 2rem;
+        margin-left: 1rem;
+      }
+  
+      .stats {
+        font-family: var(--Gilroy);
+        font-size: 1.2rem;
+        letter-spacing: 1.5px;
+      }
+  
+      .rain-chance {
+        font-family: var(--Gilroy);
+        font-size: 1.4rem;
+        letter-spacing: 1.5px;
+      }
+  
+      p {
+        margin: 0;
+        /* remove default margins */
+      }
+    }
+  
     .weather-highlights {
-      padding: 1rem ;
-      
+      padding: 1rem;
+  
       display: flex;
       flex-direction: column;
       text-align: left;
-      
-      
-
-      .weather-condition-title{
-       font-size: 2rem;
-      font-family: var(--Gilroy);
-      letter-spacing: 0.9px;
-       font-weight: 400;
-       color: white;
-       
+  
+      .weather-condition-title {
+        font-size: 2rem;
+        font-family: var(--Gilroy);
+        letter-spacing: 0.9px;
+        font-weight: 400;
+        color: white;
       }
-
-      .wind-speed{
+  
+      .wind-speed {
         font-size: 4rem;
         font-family: var(--Gilroy);
-        font-weight:400;
+        font-weight: 400;
         letter-spacing: 0.9px;
-        margin: 3rem 0 ;
-        
-        .km{
-           font-size: 2rem;
+        margin: 3rem 0;
+  
+        .km {
+          font-size: 2rem;
         }
-       }
-
-        .speed-text{
-
-        }
-     
+      }
+  
+      .speed-text {}
     }
- }
-    
-  
-   
+}
 
-    
-   
-  
-    
-
-
-
-
-
+}

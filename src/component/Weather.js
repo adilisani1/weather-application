@@ -57,11 +57,13 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
 
                     {forecast?.slice(0, 6).map((item) => {
 
-
                         const date = new Date(item.dt_txt);
                         const weekday = date.toLocaleDateString('en-US', { weekday: 'short' })
                         const day = date.getDate();
                         const { main, description } = item.weather[0]
+
+                        // const hours = date.getUTCHours();
+                        // const isDaytime = hours >= 6 && hours <= 18;
                         const weatherIcon = getWeatherIcon(main, description)
 
                         return (
@@ -81,19 +83,13 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                         {/* <h5 className="deg-feel">{parseInt(item.main.temp_min?.toFixed(2))}° / {parseInt(item.main.temp_max?.toFixed(2))}°</h5>
                                          */}
                                         <h5 className="deg-feel">{`${parseInt(item.main.temp_min?.toFixed(2))} / ${parseInt(item.main.temp_max?.toFixed(2))}`}°</h5>
-                                        <p className="stats"> {item.weather[0].description}</p>
+                                        <p className="stats"> {`${item.weather[0].description}`}</p>
                                     </div>
                                 </div>
                             </div>
                         )
 
-
-
-
                     })}
-
-
-
                 </div>
             </div>
 
@@ -114,7 +110,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Wind Status</h5>
                                 <h1 className="wind-speed">
-                                    7.70
+                                    {/* 7.70 */}{weatherData.speed}
                                     <span className="km"> km/h</span>
                                 </h1>
                                 <span className="speed-text">Speed</span>
@@ -181,8 +177,8 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                     <div className="col-md-4 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
-                                <h5 className="weather-condition-title">Air Quality</h5>
-                                <h1 className="wind-speed">105</h1>
+                                <h5 className="weather-condition-title">Pressure</h5>
+                                <h1 className="wind-speed">{weatherData.pressure}</h1>
                                 <span className="speed-text">Unhealthy</span>
                             </div>
                         </div>

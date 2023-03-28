@@ -37,12 +37,10 @@ function App() {
       const city = data.name;
       const date = data.dt;
       const visibility = data.visibility;
-
+      const { speed } = data.wind;
       //5 day forecast
       const forecastData = await forecastResponse.json();
       const { list } = forecastData
-
-      console.log(list)
 
       const uniqueDates = new Set();
       const filteredForecast = list.filter((item) => {
@@ -69,7 +67,8 @@ function App() {
         date,
         city,
         country,
-        visibility
+        visibility,
+        speed
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
@@ -139,10 +138,11 @@ function App() {
 
 
   //Forecast 6 days
-  const getWeatherIcon = (main, description) => {
+  const getWeatherIcon = (main, description, isDaytime) => {
+
     switch (main) {
       case "Clear": {
-        return sunny;
+        return isDaytime ? sunny : clear;
       }
       case "Clouds": {
         if (description === "overcast clouds") {

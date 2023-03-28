@@ -3,6 +3,19 @@ import "./Header.scss";
 const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }) => {
 
     const [toggleTheme, setToggleTheme] = useState("dark");
+    const [units, setUnits] = useState("metric");
+    const [isCelcius, setIsCelcius] = useState(true);
+    const toCelsius = (temp) => {
+        return (temp - 32) * 5 / 9;
+    };
+
+    const toFahrenheit = (temp) => {
+        return (temp * 9 / 5) + 32;
+    };
+
+    function handleUnitClick() {
+        setIsCelcius(!isCelcius);
+    }
 
     const themeHandler = () => {
         if (toggleTheme === "dark") {
@@ -48,12 +61,14 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
 
                     <div className="d-flex align-items-center justify-flex-end">
                         <div className="weather-temp">
-                            {/* <span className="deg">{parseInt(displayedTemp)}°</span> */}
-                            <span className="circle active">
-                                °C
+                            <span className="deg">
+                                {isCelcius ? parseInt(weatherData.temp) : parseInt(toFahrenheit(weatherData.temp))}°
                             </span>
-                            <span className="circle ">
+                            <span className={`circle ${isCelcius ? 'active' : ''}`} onClick={handleUnitClick}>
                                 °F
+                            </span>
+                            <span className={`circle ${!isCelcius ? 'active' : ''}`} onClick={handleUnitClick}>
+                                °C
                             </span>
 
                         </div>

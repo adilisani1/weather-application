@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Weather.scss";
 
-const Weather = ({ weatherData, time, weatherState }) => {
+
+const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) => {
+
 
     return (
         <>
@@ -51,123 +53,46 @@ const Weather = ({ weatherData, time, weatherState }) => {
 
             <div className="container">
                 <div className="row mt-5 text-center align-items-center d-flex justify-content-center">
-                    <div className="col-md-2 img-card">
 
-                        <div className="forecast-card ">
-                            <div className="card-body">
-                                <h5 className="day">27 MON</h5>
-                            </div>
-                            <div className="icon-img">
-                                <img
-                                    className="icons"
-                                    src="/images/weather-icons/sunny.svg"
-                                    alt="Card image cap"
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h5 className="deg-feel">18° / 23°</h5>
-                                <p className="stats">Mostly Clear</p>
-                                {/* <p className="rain-chance">Rain 18%</p> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2 img-card">
-                        <div className="forecast-card ">
-                            <div className="card-body">
-                                <h5 className="day">28 TUE</h5>
-                            </div>
-                            <div className="icon-img">
-                                <img
-                                    className="icons"
-                                    src="/images/weather-icons/overcast.svg"
-                                    alt="Card image cap"
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h5 className="deg-feel">18° / 23°</h5>
-                                <p className="stats">Mostly Clear</p>
-                                {/* <p className="rain-chance">Rain 18%</p> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2 img-card">
 
-                        <div className="forecast-card ">
-                            <div className="card-body">
-                                <h5 className="day">27 MON</h5>
-                            </div>
-                            <div className="icon-img">
-                                <img
-                                    className="icons"
-                                    src="/images/weather-icons/sunny.svg"
-                                    alt="Card image cap"
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h5 className="deg-feel">18° / 23°</h5>
-                                <p className="stats">Mostly Clear</p>
-                                {/* <p className="rain-chance">Rain 18%</p> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2 img-card">
-                        <div className="forecast-card ">
-                            <div className="card-body">
-                                <h5 className="day">29 WED</h5>
-                            </div>
-                            <div className="icon-img">
-                                <img
-                                    className="icons"
-                                    src="/images/weather-icons/windy.svg"
-                                    alt="Card image cap"
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h5 className="deg-feel">18° / 23°</h5>
-                                <p className="stats">Mostly Clear</p>
-                                {/* <p className="rain-chance">Rain 18%</p> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2 img-card">
-                        <div className="forecast-card ">
-                            <div className="card-body">
-                                <h5 className="day">30 THU</h5>
-                            </div>
-                            <div className="icon-img">
-                                <img
-                                    className="icons"
-                                    src="/images/weather-icons/clear.svg"
-                                    alt="Card image cap"
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h5 className="deg-feel">18° / 23°</h5>
-                                <p className="stats">Mostly Clear</p>
-                                {/* <p className="rain-chance">Rain 18%</p> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2 img-card">
-                        <div className="forecast-card ">
-                            <div className="card-body">
-                                <h5 className="day">31 FRI</h5>
-                            </div>
-                            <div className="icon-img">
-                                <img
-                                    className="icons"
-                                    src="/images/weather-icons/cloud.svg"
-                                    alt="Card image cap"
-                                />
+                    {forecast?.slice(0, 6).map((item) => {
 
+
+                        const date = new Date(item.dt_txt);
+                        const weekday = date.toLocaleDateString('en-US', { weekday: 'short' })
+                        const day = date.getDate();
+                        const { main, description } = item.weather[0]
+                        const weatherIcon = getWeatherIcon(main, description)
+
+                        return (
+                            <div className="col-md-2 col-auto img-card">
+                                <div className="forecast-card ">
+                                    <div className="card-body">
+                                        <h5 className="day">{`${day} ${weekday}`} </h5>
+                                    </div>
+                                    <div className="icon-img">
+                                        <img
+                                            className="icons"
+                                            src={weatherIcon}
+                                            alt="Card image cap"
+                                        />
+                                    </div>
+                                    <div className="card-body">
+                                        {/* <h5 className="deg-feel">{parseInt(item.main.temp_min?.toFixed(2))}° / {parseInt(item.main.temp_max?.toFixed(2))}°</h5>
+                                         */}
+                                        <h5 className="deg-feel">{`${parseInt(item.main.temp_min?.toFixed(2))} / ${parseInt(item.main.temp_max?.toFixed(2))}`}°</h5>
+                                        <p className="stats"> {item.weather[0].description}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="card-body">
-                                <h5 className="deg-feel">18° / 23°</h5>
-                                <p className="stats">Mostly Clear</p>
-                                {/* <p className="rain-chance">Rain 18%</p> */}
-                            </div>
-                        </div>
-                    </div>
+                        )
+
+
+
+
+                    })}
+
+
 
                 </div>
             </div>
@@ -209,7 +134,7 @@ const Weather = ({ weatherData, time, weatherState }) => {
                                         />
                                     </div>
                                     <div className="col-md-3">
-                                        <h1>6:35</h1>
+                                        <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString()}</h1>
                                         <p>-1m 46s</p>
                                     </div>
                                 </div>
@@ -222,7 +147,7 @@ const Weather = ({ weatherData, time, weatherState }) => {
                                         />
                                     </div>
                                     <div className="col-md-3">
-                                        <h1>6:35</h1>
+                                        <h1>{new Date(weatherData.sunset * 1000).toLocaleTimeString()}</h1>
                                         <p>-1m 46s</p>
                                     </div>
                                 </div>
@@ -236,7 +161,7 @@ const Weather = ({ weatherData, time, weatherState }) => {
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Humidity</h5>
-                                <h1 className="wind-speed">12%</h1>
+                                <h1 className="wind-speed">{weatherData.humidity}%</h1>
                                 <span className="speed-text">Normal</span>
                             </div>
                         </div>
@@ -246,7 +171,8 @@ const Weather = ({ weatherData, time, weatherState }) => {
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Visibility</h5>
                                 <h1 className="wind-speed">
-                                    5.2 <span className="km">km/h</span>
+                                    {weatherData.visibility}
+                                    {/* <span className="km">km/h</span> */}
                                 </h1>
                                 <span className="speed-text">Average</span>
                             </div>

@@ -11,23 +11,37 @@ import heavyrain from './image/heavy-rain.svg';
 import lightrain from './image/light-rain.svg';
 import smoke from './image/smoke.png';
 import snow from './image/snow.svg';
-
+import haze from './image/haze.svg';
+import thunderstorm from "./image/thunderstorm.svg"
+import drizzle from "./image/drizzle.svg";
+import fewClouds from './image/few-clouds.svg';
+import brokenClouds from "./image/broken-clouds.svg";
 function App() {
-  const [searchWeather, setSearchWeather] = useState("karachi");
+
+  const handleSearch = () => {
+    getWeatherData();
+  }
+  const [location, setLocation] = useState({});
+  const [searchInput, setSearchInput] = useState("");
+  const [units, setUnits] = useState("metric");
   const [weatherData, setWeatherData] = useState([]);
   const [weatherState, setWeatherState] = useState("");
   const [time, setTime] = useState("");
+
+  const lat = "24.887296"
+  const lng = "67.059712"
 
   const [forecast, setForecast] = useState([])
 
   const getWeatherData = async () => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchWeather}&lat=57&lon=-2.15&appid=${apiKey}&units=metric&units=imperial`
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&lat=${lat}&lon=${lng}&appid=${apiKey}&units=${units}`
       );
       const forecastResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${searchWeather}&lat=57&lon=-2.15&appid=${apiKey}&units=metric&units=imperial`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&units=imperial`
       );
+
 
       const data = await response.json();
       const { main, description } = data.weather[0];
@@ -68,18 +82,33 @@ function App() {
         city,
         country,
         visibility,
-        speed
+        speed,
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
-      setSearchWeather("");
     } catch (e) {
       console.log(e);
     }
   };
+
   useEffect(() => {
     getWeatherData();
-  }, []);
+  }, [units]);
+
+
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         // const { latitude, longitude } = position.coords;
+  //         getWeatherData(lat, lng);
+  //       },
+  //       (error) => {
+  //         console.error(error);
+  //       }
+  //     );
+  //   }
+  // }, [units]);
 
   const calculateTime = (timezone) => {
     const date = new Date(Date.now() + timezone);
@@ -107,7 +136,14 @@ function App() {
       case "Clouds": {
         if (weatherData.description === "overcast clouds") {
           setWeatherState(overcast);
-        } else {
+        }
+        else if (weatherData.description === "few clouds") {
+          setWeatherState(fewClouds);
+        }
+        else if (weatherData.description === "broken clouds") {
+          setWeatherState(brokenClouds);
+        }
+        else {
           setWeatherState(cloud);
         }
         break;
@@ -118,6 +154,18 @@ function App() {
       }
       case "Snow": {
         setWeatherState(snow);
+        break;
+      }
+      case "Thunderstorm": {
+        setWeatherState(thunderstorm);
+        break;
+      }
+      case "Haze": {
+        setWeatherState(haze);
+        break;
+      }
+      case "Drizzle": {
+        setWeatherState(drizzle);
         break;
       }
       case "Rain": {
@@ -138,16 +186,22 @@ function App() {
 
 
   //Forecast 6 days
-  const getWeatherIcon = (main, description, isDaytime) => {
+  const getWeatherIcon = (main, description) => {
 
     switch (main) {
       case "Clear": {
-        return isDaytime ? sunny : clear;
+        return sunny;
       }
       case "Clouds": {
         if (description === "overcast clouds") {
           return overcast;
-        } else {
+        } else if (description === "broken clouds") {
+          return brokenClouds;
+        }
+        else if (description === "few clouds") {
+          return fewClouds;
+        }
+        else {
           return cloud;
         }
       }
@@ -172,13 +226,22 @@ function App() {
     }
   };
 
+
   return (
     <div className="App">
+      <div>
+        <p>Latitude: {location.latitude}</p>
+        <p>Longitude: {location.longitude}</p>
+      </div>
       <Header
-        searchWeather={searchWeather}
-        setSearchWeather={setSearchWeather}
+        handleSearch={handleSearch}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
         getWeatherData={getWeatherData}
         weatherData={weatherData}
+        setUnits={setUnits}
+        units={units}
+
       />
       <Weather
         time={time}

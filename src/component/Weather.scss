@@ -155,8 +155,9 @@
     .deg-feel {
       font-family: var(--AgudaBlackUnicase);
       letter-spacing: 1.5px;
-      font-size: 2rem;
-      margin-left: 1rem;
+      font-size: 2.5rem;
+      margin-left: 0.5rem;
+      
     }
     .stats {
       font-family: var(--Gilroy);
@@ -280,10 +281,20 @@
   
     .weather-highlights {
       padding: 1rem;
-  
       display: flex;
       flex-direction: column;
       text-align: left;
+
+      .status-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        img {
+          width: 30%;
+          margin-right: 2rem;
+        }
+      }
   
       .weather-condition-title {
         font-size: 2rem;

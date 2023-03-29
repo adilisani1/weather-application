@@ -59,9 +59,10 @@
         border: 0;
         outline: 0;
         background: none;
-        // caret-color: transparent;
         line-height: 40px;
         transition: width 0.4s linear;
+        background-color: transparent;
+        transition: transform 250ms ease-in-out;
         }
 
                  .search-icon {

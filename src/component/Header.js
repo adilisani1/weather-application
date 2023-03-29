@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Header.scss";
-const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }) => {
+const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, searchInput, setSearchInput }) => {
 
     const [toggleTheme, setToggleTheme] = useState("dark");
-    const [units, setUnits] = useState("metric");
     const [isCelcius, setIsCelcius] = useState(true);
-    const toCelsius = (temp) => {
-        return (temp - 32) * 5 / 9;
-    };
-
-    const toFahrenheit = (temp) => {
-        return (temp * 9 / 5) + 32;
-    };
-
-    function handleUnitClick() {
-        setIsCelcius(!isCelcius);
-    }
 
     const themeHandler = () => {
         if (toggleTheme === "dark") {
@@ -25,10 +13,21 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
         }
     }
 
+    const handleUnitToggle = () => {
+        setUnits(units === "metric" ? "imperial" : "metric");
+        setIsCelcius(!isCelcius)
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleSearch();
+
+    }
 
     useEffect(() => {
         document.body.className = toggleTheme;
     }, [toggleTheme])
+
 
     return (
         <div className="container">
@@ -48,27 +47,27 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
 
                     <div className="search-box">
                         <ion-icon name="search-outline" class="search-icon" onClick={() => getWeatherData()}></ion-icon>
-                        <input
-                            type="text"
-                            id="search"
-                            autoFocus
-                            placeholder="Search city ..."
-                            className="search-input"
-                            value={searchWeather}
-                            onChange={(e) => setSearchWeather(e.target.value)}
-                        />
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                type="text"
+                                id="search"
+                                autoFocus
+                                placeholder="Search city..."
+                                className="search-input"
+                                value={searchInput}
+                                onChange={(e) => setSearchInput(e.target.value)}
+                            />
+                        </form>
                     </div>
 
                     <div className="d-flex align-items-center justify-flex-end">
                         <div className="weather-temp">
-                            <span className="deg">
-                                {isCelcius ? parseInt(weatherData.temp) : parseInt(toFahrenheit(weatherData.temp))}°
-                            </span>
-                            <span className={`circle ${isCelcius ? 'active' : ''}`} onClick={handleUnitClick}>
-                                °F
-                            </span>
-                            <span className={`circle ${!isCelcius ? 'active' : ''}`} onClick={handleUnitClick}>
+
+                            <span className={`circle ${isCelcius ? 'active' : ''}`} onClick={handleUnitToggle}>
                                 °C
+                            </span>
+                            <span className={`circle ${!isCelcius ? 'active' : ''}`} onClick={handleUnitToggle}>
+                                °F
                             </span>
 
                         </div>
@@ -91,5 +90,19 @@ const Header = ({ weatherData, searchWeather, getWeatherData, setSearchWeather }
         </div >
     );
 };
+
+// const toggleUnit = () => {
+//     setUnit(unit === "metric" ? "imperial" : "metric");
+// };
+
+// return (
+//     <div className="App">
+//         <h1>
+//             <span>{celsiusTemp}°C</span>
+//             <span>{fahrenheitTemp}°F</span>
+//         </h1>
+//         <button onClick={toggleUnit}>Toggle Unit</button>
+//     </div>
+// );
 
 export default Header;

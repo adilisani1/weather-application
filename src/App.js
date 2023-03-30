@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
-import Header from "./component/Header";
-import Weather from "./component/Weather";
+import Header from "./component/Header/Header";
+import Weather from "./component/Weather/Weather";
 import clear from "./image/clear.svg";
 import cloud from "./image/cloud.svg";
 import overcast from "./image/overcast.svg";
@@ -16,34 +16,35 @@ import thunderstorm from "./image/thunderstorm.svg"
 import drizzle from "./image/drizzle.svg";
 import fewClouds from './image/few-clouds.svg';
 import brokenClouds from "./image/broken-clouds.svg";
+import scatteredClouds from "./image/scattered-clouds.svg";
+import Loading from './component/Loading/Loading';
+import './App.scss';
 function App() {
 
-  const handleSearch = () => {
-    getWeatherData();
-  }
-  const [location, setLocation] = useState({});
   const [searchInput, setSearchInput] = useState("");
   const [units, setUnits] = useState("metric");
   const [weatherData, setWeatherData] = useState([]);
   const [weatherState, setWeatherState] = useState("");
   const [time, setTime] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasLocationAccess, setHasLocationAccess] = useState(false);
 
-  const lat = "24.887296"
-  const lng = "67.059712"
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const [forecast, setForecast] = useState([])
 
   const getWeatherData = async () => {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&lat=${lat}&lon=${lng}&appid=${apiKey}&units=${units}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
       );
       const forecastResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&units=imperial`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
       );
 
-
       const data = await response.json();
+
       const { main, description } = data.weather[0];
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } = data.main;
       const { sunrise, sunset, country } = data.sys;
@@ -52,6 +53,8 @@ function App() {
       const date = data.dt;
       const visibility = data.visibility;
       const { speed } = data.wind;
+      const { all } = data.clouds
+
       //5 day forecast
       const forecastData = await forecastResponse.json();
       const { list } = forecastData
@@ -83,33 +86,47 @@ function App() {
         country,
         visibility,
         speed,
+        all
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
+      setIsLoading(false);
+      setSearchInput("")
     } catch (e) {
       console.log(e);
     }
-  };
+  }
 
   useEffect(() => {
+    const successCallback = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+      setHasLocationAccess(true);
+    };
+    const errorCallback = () => {
+      setLatitude(37.7749);
+      setLongitude(-122.4194);
+      setHasLocationAccess(true);
+    };
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+  }, []);
+
+  useEffect(() => {
+    let timeoutId;
+    if (latitude && longitude) {
+      timeoutId = setTimeout(() => {
+        getWeatherData();
+
+      }, 1000);
+    }
+    return () => clearTimeout(timeoutId);
+
+  }, [units, latitude, longitude]);
+
+  const handleSearch = () => {
     getWeatherData();
-  }, [units]);
-
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         // const { latitude, longitude } = position.coords;
-  //         getWeatherData(lat, lng);
-  //       },
-  //       (error) => {
-  //         console.error(error);
-  //       }
-  //     );
-  //   }
-  // }, [units]);
-
+  }
   const calculateTime = (timezone) => {
     const date = new Date(Date.now() + timezone);
     const hours = date.getUTCHours().toString().padStart(2, "0");
@@ -120,9 +137,10 @@ function App() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTime(calculateTime(weatherData.timezone));
-    }, 1000);
+    }, 3000);
 
     return () => clearInterval(intervalId);
+
   }, [weatherData]);
 
   useEffect(() => {
@@ -139,6 +157,9 @@ function App() {
         }
         else if (weatherData.description === "few clouds") {
           setWeatherState(fewClouds);
+        }
+        else if (weatherData.description === "scattered clouds") {
+          setWeatherState(scatteredClouds);
         }
         else if (weatherData.description === "broken clouds") {
           setWeatherState(brokenClouds);
@@ -184,10 +205,8 @@ function App() {
     }
   }, [weatherData]);
 
-
   //Forecast 6 days
   const getWeatherIcon = (main, description) => {
-
     switch (main) {
       case "Clear": {
         return sunny;
@@ -197,6 +216,8 @@ function App() {
           return overcast;
         } else if (description === "broken clouds") {
           return brokenClouds;
+        } else if (description === "scattered clouds") {
+          return scatteredClouds;
         }
         else if (description === "few clouds") {
           return fewClouds;
@@ -226,13 +247,16 @@ function App() {
     }
   };
 
+  if (!hasLocationAccess) {
+    return <div><Loading /></div>;
+  }
+
+  if (isLoading) {
+    return <div><Loading /></div>;
+  }
 
   return (
-    <div className="App">
-      <div>
-        <p>Latitude: {location.latitude}</p>
-        <p>Longitude: {location.longitude}</p>
-      </div>
+    <div className="wrapper">
       <Header
         handleSearch={handleSearch}
         searchInput={searchInput}
@@ -241,7 +265,6 @@ function App() {
         weatherData={weatherData}
         setUnits={setUnits}
         units={units}
-
       />
       <Weather
         time={time}

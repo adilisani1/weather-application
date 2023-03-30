@@ -38,22 +38,26 @@ html {
 body {
   background: var(--main-bg);
   font-size: 1.6rem;
+  background-image: linear-gradient(rgba(0,0,0,0.5)), rgba(0,0,0,0.5), url("https://images.pexels.com/photos/2909077/pexels-photo-2909077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
   line-height: 1.6;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
+  justify-content: center;
+  padding: 1rem;
   transition: all 0.2s linear;
   line-height: 1.6;
-  // color: white;
+  display: flex;
+  min-height: 100vh;
+  min-width: 100px;
 }
 
 body.dark {
  background-color: #0c0c0c;
  color: white;
+overflow-y: hidden;
 }
 
 body.light {
 // background-color:#6552fffa;
+overflow-y: hidden;
 background-color: #D3D4EB;
 background-image: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
 background-size: cover;
@@ -70,8 +74,12 @@ body.light .forecast-card::before {
 *::after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;box-shadow: 0;
+  padding: 0;
+  box-shadow: none;
+  
 }
+
+
 
 
 // background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));

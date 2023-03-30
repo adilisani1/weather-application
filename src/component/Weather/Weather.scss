@@ -110,9 +110,14 @@
 
 .forecast-card {
   position: relative;
-  padding: 3rem;
+  padding: 3rem 0rem;
   height: 230px;
-  width: 200px;
+  // width: 200px;
+
+    // @include for_breakpoint(tablet) {
+    //     // font-size: 1.4rem;
+    //     padding: 3rem 2rem;
+    //   }
 
   &:before {
     content: "";

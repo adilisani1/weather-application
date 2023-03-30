@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Weather.scss";
 
-import windyIcon from '../image/wind.png';
-import dropsIcon from '../image/dropp.png';
-import pressureIcon from '../image/thermometer.png';
-import visibilityIcon from '../image/visibility.png';
-import uvIcon from '../image/uv-index.png';
+import windyIcon from '../../image/wind.png';
+import dropsIcon from '../../image/dropp.png';
+import pressureIcon from '../../image/thermometer.png';
+import visibilityIcon from '../../image/visibility.png';
+import cloudComputing from "../../image/cloud-computing.png"
 
 const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) => {
 
@@ -37,17 +37,18 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                     <div className="weather-card-info">
                                         <div className="weather-deg-info">
                                             <span className="deg">{parseInt(weatherData.temp?.toFixed(2))}°</span>
-                                            <p className="info mb-0">{weatherData.main}, {weatherData.description}</p>
-                                            <p className="info mb-0"></p>
-                                            <p className="info mb-0">
+                                            <p className="info mb-0">{weatherData.main}</p>
+                                            <p className="info mb-0">{weatherData.description}</p>
+                                            <p className="info mb-0">{`RealFeel®: ${parseInt(weatherData?.feels_like?.toFixed(2))}°`}</p>
+                                            {/* <p className="info mb-0">
                                                 Humidity: {weatherData.humidity}%
-                                            </p>
+                                            </p> */}
                                         </div>
                                         <div className="head-icon-img">
                                             <img
                                                 className="icon-img"
                                                 src={weatherState}
-                                                alt=""
+                                                alt="icon-img"
                                             />
 
                                         </div>
@@ -64,7 +65,6 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
             <div className="container">
                 <div className="row mt-5 text-center align-items-center d-flex justify-content-center">
 
-
                     {forecast?.slice(0, 6).map((item) => {
 
                         const date = new Date(item.dt_txt);
@@ -72,12 +72,10 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                         const day = date.getDate();
                         const { main, description } = item.weather[0]
 
-                        // const hours = date.getUTCHours();
-                        // const isDaytime = hours >= 6 && hours <= 18;
                         const weatherIcon = getWeatherIcon(main, description)
 
                         return (
-                            <div className="col-md-2 col-auto img-card">
+                            <div className="col-md-2 col-auto col-lg-2 img-card">
                                 <div className="forecast-card ">
                                     <div className="card-body">
                                         <h5 className="day">{`${day} ${weekday}`} </h5>
@@ -109,13 +107,13 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                     <div className="col-md-4 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
-                                <h5 className="weather-condition-title">UV Index</h5>
+                                <h5 className="weather-condition-title">Clouds</h5>
 
                                 <div className="status-flex">
-                                    <h3 className="wind-speed">Low</h3>
-                                    <img src={uvIcon} alt="" />
+                                    <h3 className="wind-speed">{weatherData.all}%</h3>
+                                    <img src={cloudComputing} alt="" />
                                 </div>
-                                <span className="speed-text">Current UV</span>
+                                <span className="speed-text">All</span>
                             </div>
                         </div>
                     </div>
@@ -208,7 +206,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                     <h1 className="wind-speed">{weatherData.pressure}</h1>
                                     <img src={pressureIcon} alt="" />
                                 </div>
-                                <span className="speed-text">Unhealthy</span>
+                                <span className="speed-text">Atmosphere</span>
                             </div>
                         </div>
                     </div>

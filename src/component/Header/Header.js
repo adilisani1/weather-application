@@ -3,7 +3,7 @@ import "./Header.scss";
 const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, searchInput, setSearchInput }) => {
 
     const [toggleTheme, setToggleTheme] = useState("dark");
-    const [isCelcius, setIsCelcius] = useState(true);
+    const [isCelcius, setIsCelcius] = useState(false);
 
     const themeHandler = () => {
         if (toggleTheme === "dark") {

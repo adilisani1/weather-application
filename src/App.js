@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
 import Header from "./component/Header/Header";
 import Weather from "./component/Weather/Weather";
@@ -11,7 +11,7 @@ import heavyrain from './image/heavy-rain.svg';
 import lightrain from './image/light-rain.svg';
 import smoke from './image/smoke.png';
 import snow from './image/snow.svg';
-import haze from './image/haze.svg';
+import haze from './image/haze.png';
 import thunderstorm from "./image/thunderstorm.svg"
 import drizzle from "./image/drizzle.svg";
 import fewClouds from './image/few-clouds.svg';
@@ -19,7 +19,11 @@ import brokenClouds from "./image/broken-clouds.svg";
 import scatteredClouds from "./image/scattered-clouds.svg";
 import Loading from './component/Loading/Loading';
 import './App.scss';
+
+
+
 function App() {
+
 
   const [searchInput, setSearchInput] = useState("");
   const [units, setUnits] = useState("metric");
@@ -28,11 +32,29 @@ function App() {
   const [time, setTime] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
   const [forecast, setForecast] = useState([])
+
+  const themeHandler = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+  useEffect(() => {
+    const wrapper = document.querySelector('.wrapper');
+    if (wrapper) {
+      if (isDarkTheme) {
+        wrapper.classList.remove('light');
+        wrapper.classList.add('dark');
+      } else {
+        wrapper.classList.remove('dark');
+        wrapper.classList.add('light');
+      }
+    }
+  }, [isDarkTheme]);
+
 
   const getWeatherData = async () => {
     try {
@@ -256,8 +278,11 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
+    <div className="wrapper dark" >
+
+
       <Header
+        themeHandler={themeHandler}
         handleSearch={handleSearch}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
@@ -265,6 +290,9 @@ function App() {
         weatherData={weatherData}
         setUnits={setUnits}
         units={units}
+
+
+
       />
       <Weather
         time={time}

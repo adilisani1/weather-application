@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./Header.scss";
-const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, searchInput, setSearchInput }) => {
+const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, searchInput, setSearchInput, themeHandler }) => {
 
-    const [toggleTheme, setToggleTheme] = useState("dark");
+    // const [toggleTheme, setToggleTheme] = useState("dark");
     const [isCelcius, setIsCelcius] = useState(false);
 
-    const themeHandler = () => {
-        if (toggleTheme === "dark") {
-            setToggleTheme('light')
-        } else {
-            setToggleTheme('dark')
-        }
-    }
-
+    // const themeHandler = () => {
+    //     if (toggleTheme === "dark") {
+    //         setToggleTheme('light')
+    //     } else {
+    //         setToggleTheme('dark')
+    //     }
+    // }
     const handleUnitToggle = () => {
         setUnits(units === "metric" ? "imperial" : "metric");
         setIsCelcius(!isCelcius)
@@ -24,9 +23,9 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
 
     }
 
-    useEffect(() => {
-        document.body.className = toggleTheme;
-    }, [toggleTheme])
+    // useEffect(() => {
+    //     document.wrapper.className = toggleTheme;
+    // }, [toggleTheme])
 
 
     return (

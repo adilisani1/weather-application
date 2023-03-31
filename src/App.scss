@@ -1,11 +1,71 @@
-.wrapper{
+.wrapper {
 background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 32px 0 rgba(0, 0, 0,  40%);
     min-width: 900px;
 border-radius: 20px;
-padding: 2rem 5rem 5rem 5rem ;
+padding: 2rem 5rem 5rem 5rem;
 overflow: hidden;
 width: 1300px;
 position: relative;
+color: white;
+
+
+&.dark{
+background-color: #0c0c0c;
+  color: white;
+   overflow-y: hidden;
+
+
+   
+}
+&.light{
+    
+    overflow-y: hidden;
+    background-color: #D3D4EB;
+    background-image: url("https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    .header-wrap{
+        .header-inner{
+            .search-box{
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+                background-color: transparent;
+                
+               
+            .search-icon{
+                
+            }
+            }
+        }
+    }
+    .weather-section {
+        .weather-card {
+           
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+           
+           .loc {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+               
+            }
+        }
+    }
+        .forecast-card {
+            &::before {
+              
+               
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; // box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+              
+            }
+        }
+        .card-collection {
+           &::before {
+               
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+                   
+                }
+        }
+        
+
+}
+
 }

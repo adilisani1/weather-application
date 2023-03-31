@@ -20,7 +20,7 @@
   --Raleway: 'Raleway', sans-serif;
   --Gilroy: 'Gilroy', sans-serif;
   --AgudaBlackUnicase: 'AgudaBlackUnicaseW01-Rg';
-  // --main-bg: #131314;
+  --main-bg: #131314;
   --hero-section-color-one: #323232;
   --hero-section-color-two: #222226;
   --text-color: #ccad78;
@@ -38,7 +38,7 @@ html {
 body {
   background: var(--main-bg);
   font-size: 1.6rem;
-  background-image: linear-gradient(rgba(0,0,0,0.5)), rgba(0,0,0,0.5), url("https://images.pexels.com/photos/2909077/pexels-photo-2909077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  // background-image: linear-gradient(rgba(0,0,0,0.5)), rgba(0,0,0,0.5), url("https://images.pexels.com/photos/2909077/pexels-photo-2909077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
   line-height: 1.6;
   justify-content: center;
   padding: 1rem;
@@ -49,23 +49,22 @@ body {
   min-width: 100px;
 }
 
-body.dark {
- background-color: #0c0c0c;
- color: white;
-overflow-y: hidden;
-}
+// body.dark {
+//  background-color: #0c0c0c;
+//  color: white;
+// overflow-y: hidden;
+// }
 
 body.light {
 // background-color:#6552fffa;
-overflow-y: hidden;
-background-color: #D3D4EB;
-background-image: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-background-size: cover;
+// overflow-y: hidden;
+// background-color: #D3D4EB;
+// background-image: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+// background-size: cover;
 }
 
 body.light .weather-section .weather-card,
 body.light .forecast-card::before {
-  // background-color: #ffffff;
   color: #000000;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -75,7 +74,7 @@ body.light .forecast-card::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-shadow: none;
+  // box-shadow: none;
   
 }
 

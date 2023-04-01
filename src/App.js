@@ -291,8 +291,6 @@ function App() {
         setUnits={setUnits}
         units={units}
 
-
-
       />
       <Weather
         time={time}

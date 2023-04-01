@@ -11,14 +11,25 @@
   background-repeat: no-repeat;
   padding: 30px 0px 10px 0px;
   // background-color: #101014;
+ 
+   @media only screen and (max-width: 767px) {
+    padding: 10px 0px 10px 0px;
+    
+   }
 
   .time-date {
     // color: var(--white);
     text-align: center;
+   margin-bottom: 2rem;
 
     .time {
       font-size: 9rem;
       font-family: var(--AgudaBlackUnicase);
+      @media only screen and (max-width: 575px) {
+      
+        font-size: 6rem;
+        
+       }
     }
     p {
       margin: 0;
@@ -28,6 +39,33 @@
     }
   }
 
+  .weather-location-top {
+    .loc {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        width: 100%;
+        padding: 1.5rem;
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0));
+        // backdrop-filter: blur(10px);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    
+        .location-name {
+          font-size: 1.6rem;
+          font-family: var(--Gilroy);
+          font-weight: 600;
+          margin-left: 1.2rem;
+          letter-spacing: 0.7px;
+    
+          span {
+            font-family: var(--Gilroy);
+            font-weight: 400;
+          }
+        }
+      }
+  }
+
   .weather-card {
     color: #ffff;
     background: linear-gradient(
@@ -35,89 +73,96 @@
       rgba(255, 255, 255, 0.1),
       rgba(255, 255, 255, 0)
     );
-    // backdrop-filter: blur(10px);
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 10%);
     border-radius: 20px;
+    border-top-left-radius: 0px;
+     border-top-right-radius: 0px;
+     width: 100%;
 
-    .loc {
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      width: 100%;
-      padding: 1.5rem;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0)
-      );
-      // backdrop-filter: blur(10px);
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      .location-name {
-        font-size: 1.6rem;
-        font-family: var(--Gilroy);
-        font-weight: 600;
-        margin-left: 1.2rem;
-        letter-spacing: 0.7px;
-        span {
-          font-family: var(--Gilroy);
-          font-weight: 400;
-        }
-      }
-    }
+    // @media only screen and (max-width: 575px) {
+    //   width: 300px;
+      
+    //  }
 
     .weather-card-body {
-      padding: 2rem 4rem;
-      // width: 700px;
-      height: 250px;
-
-      .weather-card-info {
         display: flex;
         align-items: center;
-        flex-direction: wrap;
-        justify-content: center;
-        margin: 0rem 1.4rem;
+        justify-content: space-between;
+        width: 100%;
+        padding: .4rem 5rem 1rem 5rem;
+        height: 250px;
 
-        div {
-          flex: 1;
-            width: 100%;
-
+        .weather-deg-info {
           .deg {
-            font-size: 6rem;
-            text-align: center;
-            margin-bottom: 0;
-            font-family: var(--AgudaBlackUnicase);
-          }
+              font-size: 6rem;
+              text-align: center;
+              margin-bottom: 0;
+              font-family: var(--AgudaBlackUnicase);
+            }
 
-          .info {
-            font-size: 1.5rem;
-            font-family: var(--Gilroy);
-            letter-spacing: 0.7px;
-          }
+            .weather-main-status{
+                 font-size: 2rem;
+                font-family: var(--Gilroy);
+                letter-spacing: 0.7px;
+                font-weight: 550;
+            }
+          
+            .info {
+              font-size: 1.4rem;
+              font-family: var(--Gilroy);
+              letter-spacing: 0.7px;
+              font-weight: 300;
+            }
+            .real-feel {
+                  font-size: 1.4rem;
+                  font-family: var(--Gilroy);
+                  letter-spacing: 0.7px;
+                  font-weight: 300;
+              .value {
+                font-size: 1.6rem;
+                  font-family: var(--Gilroy);
+                  letter-spacing: 0.7px;
+                  font-weight: 400;
+              }
+            }
         }
 
-        .head-icon-img {
+         .head-icon-img {
           .icon-img {
-            width: 75%;
+            width: 225px;
           }
         }
-      }
     }
   }
 }
 
 .img-card {
-
  
-
 .forecast-card {
   position: relative;
   padding: 3rem 0rem;
   height: 230px;
-  // width: 200px;
+  width:300px;
+  margin: 0 auto;
+  max-width:100%;
 
-    // @include for_breakpoint(tablet) {
-    //     // font-size: 1.4rem;
-    //     padding: 3rem 2rem;
-    //   }
+@media only screen and (max-width: 1200px) {
+  //padding: 3rem 1rem;
+}
+@media only screen and (max-width: 575px){
+  // width:40%;
+  // max-width:100% ;
+  // display:flex;
+  // padding: 3rem 0rem;
+  // flex-direction: column; 
+  // justify-content: center;
+  // margin : 0 auto 
+  // Your CSS rules for screen sizes between 600px and 799px
+}
+// @media only screen and (max-width: 990px) and (max-width: 1199px) {
+//   padding: 3rem 4rem;
+//   // Your CSS rules for screen sizes between 990px and 1199px
+// }
 
   &:before {
     content: "";
@@ -135,6 +180,7 @@
     box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 10%);
     z-index: -1;
     border-radius: 15px;
+    
   }
 
   .icon-img {
@@ -180,10 +226,11 @@
   }
   .weather-highlights {
     padding: 1rem;
-
     display: flex;
     flex-direction: column;
     text-align: left;
+
+   
 
     .weather-condition-title {
       font-size: 2rem;
@@ -211,9 +258,20 @@
 }
 
 .card-collection{
+  // position: relative;
+  padding: 3rem 2rem; 
+  // height: 230px;
   position: relative;
-  padding: 3rem;
+  // padding: 3rem 0rem;
   height: 230px;
+  // width:300px;
+  margin: 0 auto;
+  max-width:100%;
+  
+ 
+  @media only screen and (max-width: 575px)  {
+    width: 300px;
+  }
   // width: 300px;
 
   &:before {
@@ -288,16 +346,38 @@
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      text-align: left;
+      text-align: left; 
+      
 
+      .rowClass{
+        margin-top: 0.3rem;
+        display:flex;
+        justify-content: space-between;
+        width: 100%;
+
+       
+        .day-night-icons{
+          // margin-right: 2rem;
+          .rise-set{
+          width: 70px;
+        }
+        }
+  
+        // justify-content: space-between;
+      }
+     
       .status-flex {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         
         img {
-          width: 30%;
-          margin-right: 2rem;
+          width: 60px;
+          @media only screen and (max-width: 990px)  {
+            // Your CSS rules for screen sizes between 990px and 1199px
+
+           margin-right: 0rem;}
         }
       }
   
@@ -315,6 +395,12 @@
         font-weight: 400;
         letter-spacing: 0.9px;
         margin: 3rem 0;
+
+        @media only screen and (max-width: 990px)  {
+            font-size: 3rem;
+            
+          }
+    
   
         .km {
           font-size: 2rem;
@@ -322,7 +408,37 @@
       }
   
       .speed-text {}
+      
     }
+    
+    
 }
 
+}
+
+
+
+// For 1200px screen and above
+@media only screen and (min-width: 1200px) {
+  // Your CSS rules for 1200px and above screens
+}
+
+// For screen sizes between 990px and 1199px
+@media only screen and (min-width: 990px) and (max-width: 1199px) {
+  // Your CSS rules for screen sizes between 990px and 1199px
+}
+
+// For screen sizes between 800px and 989px
+@media only screen and (min-width: 800px) and (max-width: 989px) {
+  // Your CSS rules for screen sizes between 800px and 989px
+}
+
+// For screen sizes between 600px and 799px
+@media only screen and (min-width: 600px) and (max-width: 799px) {
+  // Your CSS rules for screen sizes between 600px and 799px
+}
+
+// For screen sizes up to 599px
+@media only screen and (max-width: 599px) {
+  // Your CSS rules for screen sizes up to 599px
 }

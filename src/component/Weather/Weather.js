@@ -16,52 +16,51 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
 
     return (
         <>
+            {/* Section-top */}
             <section className="weather-section">
                 <div className="container">
                     <div className="row align-items-center justify-content-center">
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-sm-12 col-12">
                             <div className="time-date">
                                 <span className="time">{time}</span>
                                 <p> {weekday} | {formattedDate} </p>
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <div className="weather-card">
+                        <div className="col-md-6 col-sm-12 col-12 mt-sm-5">
+                            <div className="weather-location-top">
                                 <div className="loc">
                                     <span className="location-name">
                                         {weatherData.city} ,<span> {weatherData.country}</span>
-
                                     </span>
                                 </div>
-                                <div className="weather-card-body">
-                                    <div className="weather-card-info">
-                                        <div className="weather-deg-info">
-                                            <span className="deg">{parseInt(weatherData.temp?.toFixed(2))}°</span>
-                                            <p className="info mb-0">{weatherData.main}</p>
-                                            <p className="info mb-0">{weatherData.description}</p>
-                                            <p className="info mb-0">{`RealFeel®: ${parseInt(weatherData?.feels_like?.toFixed(2))}°`}</p>
-                                            {/* <p className="info mb-0">
-                                                Humidity: {weatherData.humidity}%
-                                            </p> */}
-                                        </div>
-                                        <div className="head-icon-img">
-                                            <img
-                                                className="icon-img"
-                                                src={weatherState}
-                                                alt="icon-img"
-                                            />
+                            </div>
 
-                                        </div>
+                            <div className="weather-card">
+                                <div className="weather-card-body">
+                                    <div className="weather-deg-info">
+                                        <span className="deg">{parseInt(weatherData.temp?.toFixed(2))}°</span>
+                                        <p className="weather-main-status mb-0">{weatherData.main}</p>
+                                        <p className="info mb-0">{weatherData.description}</p>
+                                        <p className="real-feel mb-0">RealFeel®: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
+                                    </div>
+                                    <div className="head-icon-img">
+                                        <img
+                                            className="icon-img"
+                                            src={weatherState}
+                                            alt="icon-img"
+                                        />
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </section>
 
 
-
+            {/* Forecast Section */}
             <div className="container">
                 <div className="row mt-5 text-center align-items-center d-flex justify-content-center">
 
@@ -75,7 +74,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                         const weatherIcon = getWeatherIcon(main, description)
 
                         return (
-                            <div className="col-md-2 col-auto col-lg-2 img-card">
+                            <div className="col-md-2 col-sm-4   img-card">
                                 <div className="forecast-card ">
                                     <div className="card-body">
                                         <h5 className="day">{`${day} ${weekday}`} </h5>
@@ -101,10 +100,10 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                 </div>
             </div>
 
-            {/* LARGE CARDS */}
+            {/* WEATHER-INFOR */}
             <div className="container">
-                <div className="row mt-3 text-center align-items-center d-flex justify-content-center">
-                    <div className="col-md-4 img-card">
+                <div className="row ">
+                    <div className="col-md-4 col-sm-6 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Clouds</h5>
@@ -117,11 +116,12 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 img-card">
+                    <div className="col-md-4 col-sm-6 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Wind Status</h5>
                                 <div className="status-flex">
+
                                     <h1 className="wind-speed">
                                         {/* 7.70 */}{weatherData.speed}
                                         <span className="km"> km/h</span>
@@ -133,44 +133,41 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4  img-card">
+                    <div className="col-md-4 col-sm-6 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Sunrise & Sunset</h5>
 
-                                <div className="row align-items-center mt-2">
-                                    <div className="col-md-3">
+                                <div className="rowClass">
+                                    <div className="">
+                                        <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
+                                        <p>-1m 46s</p>
+                                    </div>
+                                    <div className="day-night-icons">
                                         <img
-                                            className="icons "
+                                            className="rise-set"
                                             src="/images/weather-icons/sunny.svg"
                                             alt="Card image cap"
                                         />
                                     </div>
-                                    <div className="col-md-3">
-                                        <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString()}</h1>
+                                </div>
+                                <div className="rowClass">
+                                    <div className="">
+                                        <h1>{new Date(weatherData.sunset * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
                                         <p>-1m 46s</p>
                                     </div>
-                                </div>
-                                <div className="row align-items-center mt-2">
-                                    <div className="col-md-3">
+                                    <div className="day-night-icons">
                                         <img
-                                            className="icons "
+                                            className="rise-set"
                                             src="/images/weather-icons/clear.svg"
                                             alt="Card image cap"
                                         />
-                                    </div>
-                                    <div className="col-md-3">
-                                        <h1>{new Date(weatherData.sunset * 1000).toLocaleTimeString()}</h1>
-                                        <p>-1m 46s</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="row mt-3 text-center align-items-center d-flex justify-content-center">
-                    <div className="col-md-4 img-card">
+                    <div className="col-md-4 col-sm-6 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Humidity</h5>
@@ -183,7 +180,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 img-card">
+                    <div className="col-md-4 col-sm-6 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Visibility</h5>
@@ -198,7 +195,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 img-card">
+                    <div className="col-md-4 col-sm-6 img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
                                 <h5 className="weather-condition-title">Pressure</h5>
@@ -211,6 +208,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                         </div>
                     </div>
                 </div>
+
             </div>
         </>
     );

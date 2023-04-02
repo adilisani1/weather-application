@@ -20,16 +20,13 @@ import scatteredClouds from "./image/scattered-clouds.svg";
 import Loading from './component/Loading/Loading';
 import './App.scss';
 
-
-
 function App() {
-
 
   const [searchInput, setSearchInput] = useState("");
   const [units, setUnits] = useState("metric");
   const [weatherData, setWeatherData] = useState([]);
   const [weatherState, setWeatherState] = useState("");
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [isLoading, setIsLoading] = useState(true);
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -155,10 +152,9 @@ function App() {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime(calculateTime(weatherData.timezone));
-    }, 3000);
-    return () => clearInterval(intervalId);
+
+    setTime(calculateTime(weatherData.timezone));
+
   }, [weatherData]);
 
   useEffect(() => {
@@ -273,9 +269,9 @@ function App() {
     return <div><Loading /></div>;
   }
 
+
   return (
     <div className="wrapper dark" >
-
 
       <Header
         themeHandler={themeHandler}

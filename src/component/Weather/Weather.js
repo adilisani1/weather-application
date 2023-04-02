@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Weather.scss";
 
 import windyIcon from '../../image/wind.png';
@@ -9,10 +9,18 @@ import cloudComputing from "../../image/cloud-computing.png"
 
 const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) => {
 
-    const date = new Date();
-    const dayMonth = { month: 'short', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', dayMonth);
-    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' })
+    const [formattedDate, setFormattedDate] = useState('');
+    const [weekday, setWeekday] = useState('');
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            const date = new Date();
+            const dayMonth = { month: 'short', day: 'numeric' };
+            setFormattedDate(date.toLocaleDateString('en-US', dayMonth));
+            setWeekday(date.toLocaleDateString('en-US', { weekday: 'long' }));
+        }, 800);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <>
@@ -41,7 +49,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                         <span className="deg">{parseInt(weatherData.temp?.toFixed(2))}°</span>
                                         <p className="weather-main-status mb-0">{weatherData.main}</p>
                                         <p className="info mb-0">{weatherData.description}</p>
-                                        <p className="real-feel mb-0">RealFeel: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
+                                        <p className="real-feel mb-0">RealFeel®: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
                                     </div>
                                     <div className="head-icon-img">
                                         <img
@@ -52,7 +60,6 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                     </div>
                                 </div>
                             </div>
-
 
                         </div>
                     </div>

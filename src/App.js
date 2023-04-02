@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
 import Header from "./component/Header/Header";
 import Weather from "./component/Weather/Weather";
@@ -71,6 +71,7 @@ function App() {
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } = data.main;
       const { sunrise, sunset, country } = data.sys;
       const timezone = data.timezone * 1000;
+      // const timezone = data.timezone;
       const city = data.name;
       const date = data.dt;
       const visibility = data.visibility;
@@ -131,7 +132,6 @@ function App() {
       setHasLocationAccess(true);
     };
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
   }, []);
 
   useEffect(() => {
@@ -139,11 +139,9 @@ function App() {
     if (latitude && longitude) {
       timeoutId = setTimeout(() => {
         getWeatherData();
-
       }, 1000);
     }
     return () => clearTimeout(timeoutId);
-
   }, [units, latitude, longitude]);
 
   const handleSearch = () => {
@@ -160,9 +158,7 @@ function App() {
     const intervalId = setInterval(() => {
       setTime(calculateTime(weatherData.timezone));
     }, 3000);
-
     return () => clearInterval(intervalId);
-
   }, [weatherData]);
 
   useEffect(() => {

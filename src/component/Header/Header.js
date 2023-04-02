@@ -17,15 +17,17 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
     return (
         // <div className="container">
         <header className="header-wrap">
-            <div className="location-area">
+            <div className="location-area fl">
                 <div className="logo-img">
                     <img src="./images/logo/logo-weather.png" alt="weather-logo" />
                 </div>
-                <ion-icon name="location-sharp"></ion-icon>
-                <span className="location-top">{weatherData.city} <span>{weatherData.country}</span></span>
+                <div className="location-header">
+                    <ion-icon name="location-sharp"></ion-icon>
+                    <span className="location-top">{weatherData.city} <span>{weatherData.country}</span></span>
+                </div>
             </div>
 
-            <div className="search-box">
+            <div className="search-box fl">
                 <ion-icon name="search-outline" class="search-icon" onClick={() => getWeatherData()}></ion-icon>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -40,7 +42,7 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
                 </form>
             </div>
 
-            <div className="right-side-values">
+            <div className="right-side-values fl">
                 <div className="weather-temp">
                     <span className={`circle ${isCelcius ? 'active' : ''}`} onClick={handleUnitToggle}>
                         °C

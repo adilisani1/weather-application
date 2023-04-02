@@ -41,7 +41,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                         <span className="deg">{parseInt(weatherData.temp?.toFixed(2))}°</span>
                                         <p className="weather-main-status mb-0">{weatherData.main}</p>
                                         <p className="info mb-0">{weatherData.description}</p>
-                                        <p className="real-feel mb-0">RealFeel®: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
+                                        <p className="real-feel mb-0">RealFeel: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
                                     </div>
                                     <div className="head-icon-img">
                                         <img

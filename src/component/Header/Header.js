@@ -9,10 +9,10 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
         setIsCelcius(!isCelcius)
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleSearch();
-    }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     handleSearch();
+    // }
 
     return (
         // <div className="container">
@@ -29,12 +29,12 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
 
             <div className="search-box fl">
                 <ion-icon name="search-outline" class="search-icon" onClick={() => getWeatherData()}></ion-icon>
-                <form onSubmit={handleSubmit}>
+                <form >
                     <input
                         type="text"
                         id="search"
                         autoFocus
-                        placeholder="Search city..."
+                        placeholder="Berlin DE"
                         className="search-input"
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}

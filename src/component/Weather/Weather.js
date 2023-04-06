@@ -38,7 +38,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             <div className="weather-location-top">
                                 <div className="loc">
                                     <span className="location-name">
-                                        {weatherData.city} ,<span> {weatherData.country}</span>
+                                        {weatherData.city}<span> {weatherData.country}</span>
                                     </span>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             <div className="weather-card">
                                 <div className="weather-card-body">
                                     <div className="weather-deg-info">
-                                        <span className="deg">{parseInt(weatherData.temp?.toFixed(2))}°</span>
+                                        <span className="deg">{parseInt(weatherData.temp?.toFixed())}°</span>
                                         <p className="weather-main-status mb-0">{weatherData.main}</p>
                                         <p className="info mb-0">{weatherData.description}</p>
                                         <p className="real-feel mb-0">RealFeel®: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
@@ -71,7 +71,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
             <div className="container">
                 <div className="row mt-5 text-center align-items-center d-flex justify-content-center">
 
-                    {forecast?.slice(0, 6).map((item) => {
+                    {forecast?.slice(0, 5).map((item) => {
 
                         const date = new Date(item.dt_txt);
                         const weekday = date.toLocaleDateString('en-US', { weekday: 'short' })

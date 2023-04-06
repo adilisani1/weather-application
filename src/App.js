@@ -31,8 +31,8 @@ function App() {
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(37.7749);
+  const [longitude, setLongitude] = useState(-122.4194);
 
   const [forecast, setForecast] = useState([])
 
@@ -54,7 +54,10 @@ function App() {
 
 
   const getWeatherData = async () => {
+
+
     try {
+
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
       );
@@ -63,6 +66,7 @@ function App() {
       );
 
       const data = await response.json();
+      console.log(data);
 
       const { main, description } = data.weather[0];
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } = data.main;
@@ -110,12 +114,15 @@ function App() {
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
-      setIsLoading(false);
-      setSearchInput("")
+      // setIsLoading(false);
+      // setSearchInput("")
     } catch (e) {
       console.log(e);
     }
   }
+  useEffect(() => {
+    getWeatherData();
+  }, [units]);
 
   useEffect(() => {
     const successCallback = (position) => {
@@ -131,19 +138,20 @@ function App() {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   }, []);
 
+
   useEffect(() => {
     let timeoutId;
     if (latitude && longitude) {
       timeoutId = setTimeout(() => {
         getWeatherData();
       }, 1000);
+
     }
     return () => clearTimeout(timeoutId);
+
   }, [units, latitude, longitude]);
 
-  const handleSearch = () => {
-    getWeatherData();
-  }
+
   const calculateTime = (timezone) => {
     const date = new Date(Date.now() + timezone);
     const hours = date.getUTCHours().toString().padStart(2, "0");
@@ -152,8 +160,10 @@ function App() {
   };
 
   useEffect(() => {
-
-    setTime(calculateTime(weatherData.timezone));
+    const intervalId = setInterval(() => {
+      setTime(calculateTime(weatherData.timezone));
+    }, 1000);
+    return () => clearInterval(intervalId);
 
   }, [weatherData]);
 
@@ -261,13 +271,13 @@ function App() {
     }
   };
 
-  if (!hasLocationAccess) {
-    return <div><Loading /></div>;
-  }
+  // if (!hasLocationAccess) {
+  //   return <div><Loading /></div>;
+  // }
 
-  if (isLoading) {
-    return <div><Loading /></div>;
-  }
+  // if (isLoading) {
+  //   return <div><Loading /></div>;
+  // }
 
 
   return (
@@ -275,7 +285,7 @@ function App() {
 
       <Header
         themeHandler={themeHandler}
-        handleSearch={handleSearch}
+        // handleSearch={handleSearch}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         getWeatherData={getWeatherData}

@@ -1,23 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins&display=swap');
 @import url('http://fonts.cdnfonts.com/css/gilroy-bold');
-@import url('http://fonts.cdnfonts.com/css/bahnschrift');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 @import url(//db.onlinewebfonts.com/c/0a2bda6a452a0e2e10770717bac25392?family=AgudaBlackUnicaseW01-Rg);
-
+@font-face {
+  font-family: "AgudaBlackUnicaseW01-Rg";
+  src: url("//db.onlinewebfonts.com/t/0a2bda6a452a0e2e10770717bac25392.woff2") 
+  format("woff2"), 
+}
 
 :root {
-  --Sniglet-font: "Sniglet", cursive;
-  --Oswald: 'Oswald', sans-serif;
-  --Rubik: "Rubik", cursive;
-  --Patua: "Patua One", cursive;
-  --Lobster: "lobster", cursive;
-  --Poppins: 'Poppins', sans-serif;
-  --Montserrat: 'Montserrat', sans-serif;
-  --DM-Serif: 'DM Serif Display', serif;
-  --Raleway: 'Raleway', sans-serif;
   --Gilroy: 'Gilroy', sans-serif;
   --AgudaBlackUnicase: 'AgudaBlackUnicaseW01-Rg';
   --main-bg: #131314;
@@ -26,8 +15,6 @@
   --text-color: #ccad78;
   --white: #FFFFFF;
   --card-bg: #1E1E1E;
-
-
 }
 html {
   box-sizing: border-box;
@@ -38,7 +25,6 @@ html {
 body {
   background: var(--main-bg);
   font-size: 1.6rem;
-  // background-image: linear-gradient(rgba(0,0,0,0.5)), rgba(0,0,0,0.5), url("https://images.pexels.com/photos/2909077/pexels-photo-2909077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
   line-height: 1.6;
   justify-content: center;
   padding: 1rem;
@@ -49,39 +35,11 @@ body {
   min-width: 100px;
   overflow: hidden;
 }
-
-// body.dark {
-//  background-color: #0c0c0c;
-//  color: white;
-// overflow-y: hidden;
-// }
-
-body.light {
-// background-color:#6552fffa;
-// overflow-y: hidden;
-// background-color: #D3D4EB;
-// background-image: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-// background-size: cover;
-}
-
-body.light .weather-section .weather-card,
-body.light .forecast-card::before {
-  color: #000000;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  // box-shadow: none;
-  
 }
 
-
-
-
-// background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-// backdrop-filter: blur(10px);
-// box-shadow: 0 10px 32px 0 rgb(0 0 0 / 40%);

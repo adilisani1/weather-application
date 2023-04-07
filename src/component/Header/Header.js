@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Header.scss";
-const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, searchInput, setSearchInput, themeHandler }) => {
+const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, setSearchInput, themeHandler }) => {
 
     const [isCelcius, setIsCelcius] = useState(false);
 
@@ -9,11 +9,11 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
         setIsCelcius(!isCelcius)
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     handleSearch();
-    // }
+    const handleWeatherDataFetch = async (e) => {
+        e.preventDefault();
+        await getWeatherData();
 
+    };
     return (
         // <div className="container">
         <header className="header-wrap">
@@ -28,8 +28,8 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, handleSearch, se
             </div>
 
             <div className="search-box fl">
-                <ion-icon name="search-outline" class="search-icon" onClick={() => getWeatherData()}></ion-icon>
-                <form >
+                <ion-icon name="search-outline" class="search-icon" onClick={handleWeatherDataFetch}></ion-icon>
+                <form onSubmit={handleWeatherDataFetch}>
                     <input
                         type="text"
                         id="search"

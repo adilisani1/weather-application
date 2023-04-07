@@ -52,11 +52,17 @@ function App() {
     }
   }, [isDarkTheme]);
 
+  const savePosition = (position) => {
+    setLatitude(position.coords.latitude);
+    setLongitude(position.coords.longitude);
+
+  }
 
   const getWeatherData = async () => {
 
-
     try {
+
+      await window.navigator.geolocation.getCurrentPosition(savePosition);
 
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
@@ -115,41 +121,41 @@ function App() {
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
       // setIsLoading(false);
-      // setSearchInput("")
     } catch (e) {
       console.log(e);
     }
   }
   useEffect(() => {
     getWeatherData();
-  }, [units]);
-
-  useEffect(() => {
-    const successCallback = (position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-      setHasLocationAccess(true);
-    };
-    const errorCallback = () => {
-      setLatitude(37.7749);
-      setLongitude(-122.4194);
-      setHasLocationAccess(true);
-    };
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  }, []);
+  }, [longitude, latitude, units]);
 
 
-  useEffect(() => {
-    let timeoutId;
-    if (latitude && longitude) {
-      timeoutId = setTimeout(() => {
-        getWeatherData();
-      }, 1000);
+  // useEffect(() => {
+  //   const successCallback = (position) => {
+  //     setLatitude(position.coords.latitude);
+  //     setLongitude(position.coords.longitude);
+  //     setHasLocationAccess(true);
+  //   };
+  //   const errorCallback = () => {
+  //     setLatitude(37.7749);
+  //     setLongitude(-122.4194);
+  //     setHasLocationAccess(true);
+  //   };
+  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  // }, []);
 
-    }
-    return () => clearTimeout(timeoutId);
 
-  }, [units, latitude, longitude]);
+  // useEffect(() => {
+  //   let timeoutId;
+  //   if (latitude && longitude) {
+  //     timeoutId = setTimeout(() => {
+  //       getWeatherData();
+  //     }, 1000);
+
+  //   }
+  //   return () => clearTimeout(timeoutId);
+
+  // }, [units, latitude, longitude]);
 
 
   const calculateTime = (timezone) => {
@@ -211,6 +217,10 @@ function App() {
       }
       case "Drizzle": {
         setWeatherState(drizzle);
+        break;
+      }
+      case "Mist": {
+        setWeatherState(haze);
         break;
       }
       case "Rain": {
@@ -275,7 +285,7 @@ function App() {
   //   return <div><Loading /></div>;
   // }
 
-  // if (isLoading) {
+  // if (!weatherData) {
   //   return <div><Loading /></div>;
   // }
 
@@ -285,7 +295,6 @@ function App() {
 
       <Header
         themeHandler={themeHandler}
-        // handleSearch={handleSearch}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         getWeatherData={getWeatherData}

@@ -71,7 +71,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
             <div className="container">
                 <div className="row mt-5 text-center align-items-center d-flex justify-content-center">
 
-                    {forecast?.slice(0, 5).map((item) => {
+                    {forecast?.slice(0, 6).map((item) => {
 
                         const date = new Date(item.dt_txt);
                         const weekday = date.toLocaleDateString('en-US', { weekday: 'short' })

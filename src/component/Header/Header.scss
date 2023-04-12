@@ -114,37 +114,35 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    .weather-temp {
+.weather-temp {
+    display: flex;
+    align-items: center;
+
+    .circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+       color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+    
+      font-family: var(--Montserrat);
+      font-weight: 600;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
 
-      .circle {
-        width: 35px;
-        height: 35px;
-        background-color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 0.5rem;
-        color: black;
-        font-family: var(--Montserrat);
-        font-weight: 600;
-        font-size: 1.5rem;
-        cursor: pointer;
-
-        &.active {
-          background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.1),
-            rgba(255, 255, 255, 0)
-          );
-          // backdrop-filter: blur(10px);
-          color: var(--white);
-          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
+      &.active {
+      background-color: rgb(255, 255, 255);
+        color: rgb(3, 3, 3);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       }
     }
+  }
     .form-check {
       position: relative;
 

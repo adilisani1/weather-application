@@ -27,12 +27,12 @@ function App() {
   const [weatherData, setWeatherData] = useState([]);
   const [weatherState, setWeatherState] = useState("");
   const [time, setTime] = useState(new Date().toLocaleTimeString());
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
-  const [latitude, setLatitude] = useState(37.7749);
-  const [longitude, setLongitude] = useState(-122.4194);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const [forecast, setForecast] = useState([])
 
@@ -52,17 +52,9 @@ function App() {
     }
   }, [isDarkTheme]);
 
-  const savePosition = (position) => {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
-
-  }
 
   const getWeatherData = async () => {
-
     try {
-
-      await window.navigator.geolocation.getCurrentPosition(savePosition);
 
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
@@ -120,42 +112,46 @@ function App() {
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
-      // setIsLoading(false);
     } catch (e) {
       console.log(e);
     }
   }
   useEffect(() => {
     getWeatherData();
-  }, [longitude, latitude, units]);
+
+  }, [searchInput, longitude, latitude, units]);
 
 
-  // useEffect(() => {
-  //   const successCallback = (position) => {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //     setHasLocationAccess(true);
-  //   };
-  //   const errorCallback = () => {
-  //     setLatitude(37.7749);
-  //     setLongitude(-122.4194);
-  //     setHasLocationAccess(true);
-  //   };
-  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  // }, []);
+
+  useEffect(() => {
+    const successCallback = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+      setHasLocationAccess(true);
+      setLoading(false);
+    };
+    const errorCallback = () => {
+      setLatitude(37.7749);
+      setLongitude(-122.4194);
+      setHasLocationAccess(true);
+      setLoading(false);
+    };
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  }, []);
 
 
-  // useEffect(() => {
-  //   let timeoutId;
-  //   if (latitude && longitude) {
-  //     timeoutId = setTimeout(() => {
-  //       getWeatherData();
-  //     }, 1000);
+  useEffect(() => {
+    let timeoutId;
+    if (latitude && longitude) {
+      timeoutId = setTimeout(() => {
+        getWeatherData();
+      }, 0);
 
-  //   }
-  //   return () => clearTimeout(timeoutId);
+    }
+    return () => clearTimeout(timeoutId);
 
-  // }, [units, latitude, longitude]);
+  }, [searchInput, units, latitude, longitude]);
+
 
 
   const calculateTime = (timezone) => {
@@ -281,13 +277,19 @@ function App() {
     }
   };
 
-  // if (!hasLocationAccess) {
-  //   return <div><Loading /></div>;
-  // }
 
   // if (!weatherData) {
   //   return <div><Loading /></div>;
   // }
+
+  if (!hasLocationAccess) {
+    return <div><Loading /></div>;
+  }
+
+
+  if (loading) {
+    return <div><Loading /></div>;
+  }
 
 
   return (

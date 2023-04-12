@@ -2,20 +2,11 @@ import React, { useState } from "react";
 import "./Header.scss";
 const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, setSearchInput, themeHandler }) => {
 
-    const [isCelcius, setIsCelcius] = useState(false);
     const [inputVal, setInputVal] = useState("");
-
-    // const handleUnitToggle = (e) => {
-    //     const selectedUnit = e.currentTarget.name
-    //     if (units !== selectedUnit) setUnits(selectedUnit)
-    //     setIsCelcius(!isCelcius)
-    // }
 
     const handleUnitToggle = (e) => {
         const selectedUnit = e.currentTarget.name
         if (units !== selectedUnit) setUnits(selectedUnit)
-        // Remove the following line to prevent toggling isCelcius
-        // setIsCelcius(!isCelcius)
     }
 
     const handleWeatherDataFetch = (e) => {
@@ -23,8 +14,14 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, set
         if (inputVal !== "") setSearchInput(inputVal);
         setInputVal("")
     };
+
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+            handleWeatherDataFetch(e);
+        }
+    };
+
     return (
-        // <div className="container">
         <header className="header-wrap">
             <div className="location-area fl">
                 <div className="logo-img">
@@ -45,6 +42,7 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, set
                     placeholder="Berlin DE"
                     className="search-input"
                     value={inputVal}
+                    onKeyDown={handleKeyPress}
                     onChange={(e) => setInputVal(e.target.value)}
                 />
             </div>

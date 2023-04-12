@@ -50,12 +50,6 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, set
             </div>
 
             <div className="right-side-values fl">
-                {/* <div className={`weather-temp ${isCelcius ? 'active' : ''}`}>
-
-                    <button className="circle" name="metric" onClick={handleUnitToggle}>°C</button>
-                    <button className="circle" name="imperial" onClick={handleUnitToggle}>°F</button>
-
-                </div> */}
 
                 <div className="weather-temp">
                     <button className={`circle ${units === "metric" ? 'active' : ''}`} name="metric" onClick={handleUnitToggle}>°C</button>

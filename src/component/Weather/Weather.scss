@@ -278,6 +278,10 @@
       font-family: var(--Gilroy);
       font-size: 1.2rem;
       letter-spacing: 1.5px;
+
+        @media screen and (max-width: 360px) {
+            font-size: 1rem;
+          }
     }
     .rain-chance {
       font-family: var(--Gilroy);
@@ -391,6 +395,7 @@
         font-family: var(--Gilroy);
         font-size: 1.2rem;
         letter-spacing: 1.5px;
+      
         
       }
   
@@ -414,7 +419,7 @@
       
 
       .rowClass{
-        margin-top: 0.3rem;
+        // margin-top: 0.3rem;
         display:flex;
         justify-content: space-between;
         width: 100%;
@@ -461,7 +466,7 @@
         margin: 3rem 0;
 
         @media only screen and (max-width: 990px)  {
-            font-size: 3rem;
+            font-size: 2.7rem;
             
           }
     

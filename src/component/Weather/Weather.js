@@ -22,6 +22,20 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
         return () => clearTimeout(timer);
     }, []);
 
+    const getSpeedStatus = (speed) => {
+        if (speed < 10) {
+            return "Calm";
+        } else if (speed < 20) {
+            return "Light breeze";
+        } else if (speed < 30) {
+            return "Moderate breeze";
+        } else if (speed < 40) {
+            return "Strong breeze";
+        } else {
+            return "Very strong wind";
+        }
+    };
+
     return (
         <>
             {/* Section-top */}
@@ -69,7 +83,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
 
             {/* Forecast Section */}
             <div className="container">
-                <div className="row mt-5 text-center align-items-center d-flex justify-content-center">
+                <div className="row mt-5 row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-6 row-cols-xxl-6 text-center align-items-center d-flex justify-content-center">
 
                     {forecast?.slice(0, 6).map((item) => {
 
@@ -81,7 +95,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                         const weatherIcon = getWeatherIcon(main, description)
 
                         return (
-                            <div className="col-md-2 col-sm-4   img-card">
+                            <div className=" img-card">
                                 <div className="forecast-card ">
                                     <div className="card-body">
                                         <h5 className="day">{`${day} ${weekday}`} </h5>
@@ -119,7 +133,13 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                     <h3 className="wind-speed">{weatherData.all}%</h3>
                                     <img src={cloudComputing} alt="" />
                                 </div>
-                                <span className="speed-text">All</span>
+                                <span className="speed-text">
+                                    {weatherData.all > "90" ?
+                                        "Overcast" :
+                                        weatherData.all < "1"
+                                            ? "No Clouds"
+                                            : ""}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -129,14 +149,21 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                 <h5 className="weather-condition-title">Wind Status</h5>
                                 <div className="status-flex">
 
-                                    <h1 className="wind-speed">
-                                        {/* 7.70 */}{weatherData.speed}
+                                    {/* <h1 className="wind-speed">
+                                        {weatherData.speed}
                                         <span className="km"> km/h</span>
                                     </h1>
                                     <img src={windyIcon} alt="" />
                                 </div>
-                                <span className="speed-text">Speed</span>
+                                <span className="speed-text">Speed</span> */}
 
+                                    <h1 className="wind-speed">
+                                        {parseFloat(weatherData.speed * 3.6).toFixed(1)}{" "}
+                                        <span className="km">km/h</span>
+                                    </h1>
+                                    <img src={windyIcon} alt="wind icon" />
+                                </div>
+                                <span className="speed-text">{getSpeedStatus(parseFloat(weatherData.speed * 3.6).toFixed(1))}</span>
                             </div>
                         </div>
                     </div>
@@ -183,7 +210,14 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                     <img src={dropsIcon} alt="drops icon" />
                                 </div>
 
-                                <span className="speed-text">Normal</span>
+                                <span className="speed-text">
+                                    {weatherData.humidity > 45 ? "Comfortable"
+                                        : weatherData.humidity < 30 ? "Dry"
+                                            : weatherData.humidity > 30 && weatherData.humidity < 45
+                                                ? "Normal"
+                                                : "Below"}
+                                </span>
+
                             </div>
                         </div>
                     </div>
@@ -193,12 +227,17 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                 <h5 className="weather-condition-title">Visibility</h5>
                                 <div className="status-flex">
                                     <h1 className="wind-speed">
-                                        {weatherData.visibility}
-                                        {/* <span className="km">km/h</span> */}
+                                        {(weatherData.visibility / 1000).toFixed(1)}
                                     </h1>
                                     <img src={visibilityIcon} alt="visibility icon" />
                                 </div>
-                                <span className="speed-text">Average</span>
+                                <span className="speed-text">
+                                    {weatherData.visibility === "high"
+                                        ? "High Visibility"
+                                        : weatherData.visibility === "low"
+                                            ? "Low Visibility"
+                                            : "Average Visibility"}
+                                </span>
                             </div>
                         </div>
                     </div>

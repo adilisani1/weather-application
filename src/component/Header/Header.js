@@ -3,7 +3,7 @@ import "./Header.scss";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, setSearchInput, themeHandler }) => {
+const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) => {
 
     const [inputVal, setInputVal] = useState("");
     const notify = () => toast("Weather in " + inputVal, {
@@ -47,7 +47,7 @@ const Header = ({ weatherData, getWeatherData, setUnits, units, searchInput, set
                     type="text"
                     id="search"
                     autoFocus
-                    placeholder="Berlin DE"
+                    placeholder="Search city....."
                     className="search-input"
                     value={inputVal}
                     onKeyDown={handleKeyPress}

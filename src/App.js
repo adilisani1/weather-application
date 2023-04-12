@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
 import Header from "./component/Header/Header";
 import Weather from "./component/Weather/Weather";
+
+import 'react-toastify/dist/ReactToastify.css'
 import clear from "./image/clear.svg";
 import cloud from "./image/cloud.svg";
 import overcast from "./image/overcast.svg";
@@ -35,6 +37,7 @@ function App() {
   const [longitude, setLongitude] = useState(null);
 
   const [forecast, setForecast] = useState([])
+
 
   const themeHandler = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -116,12 +119,11 @@ function App() {
       console.log(e);
     }
   }
+
+
   useEffect(() => {
     getWeatherData();
-
   }, [searchInput, longitude, latitude, units]);
-
-
 
   useEffect(() => {
     const successCallback = (position) => {
@@ -162,11 +164,12 @@ function App() {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime(calculateTime(weatherData.timezone));
-    }, 1000);
-    return () => clearInterval(intervalId);
-
+    if (weatherData && typeof weatherData.timezone === 'number') {
+      const intervalId = setInterval(() => {
+        setTime(calculateTime(weatherData.timezone));
+      }, 0);
+      return () => clearInterval(intervalId);
+    }
   }, [weatherData]);
 
   useEffect(() => {

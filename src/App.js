@@ -152,7 +152,7 @@ function App() {
     }
     return () => clearTimeout(timeoutId);
 
-  }, [searchInput, units, latitude, longitude]);
+  }, [searchInput, units]);
 
 
 
@@ -281,9 +281,6 @@ function App() {
   };
 
 
-  // if (!weatherData) {
-  //   return <div><Loading /></div>;
-  // }
 
   if (!hasLocationAccess) {
     return <div><Loading /></div>;
@@ -293,7 +290,6 @@ function App() {
   if (loading) {
     return <div><Loading /></div>;
   }
-
 
   return (
     <div className="wrapper dark" >

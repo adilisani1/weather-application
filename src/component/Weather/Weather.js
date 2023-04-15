@@ -36,6 +36,18 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
         }
     };
 
+    const getAtmosphereStatus = (pressure) => {
+        if (pressure < 1000) {
+            return "Low Pressure";
+        } else if (pressure >= 1000 && pressure <= 1010) {
+            return "Normal Pressure";
+        } else if (pressure > 1010) {
+            return "High Pressure";
+        } else {
+            return "Unknown";
+        }
+    };
+
     return (
         <>
             {/* Section-top */}
@@ -249,7 +261,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                                     <h1 className="wind-speed">{weatherData.pressure}</h1>
                                     <img src={pressureIcon} alt="pressure icon" />
                                 </div>
-                                <span className="speed-text">Atmosphere</span>
+                                <span className="speed-text">{getAtmosphereStatus(weatherData.pressure)}</span>
                             </div>
                         </div>
                     </div>

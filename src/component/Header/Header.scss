@@ -200,17 +200,46 @@
       }
     }
   }
+
+     .Toastify__toast {
+       color: #444C63;
+       font-size: 16px;
+       padding-left: 20px;
+       line-height: 20px;
+       font-weight: 400;
+       margin: 0 auto;
+  
+     }
+  
+     .Toastify__toast-container {
+       width: 100vw;
+       right: 0;
+       max-width: 100%;
+       width: 400px;
+     }
+  
+    
  @media only screen and (max-width: 767px) {
-    .Toastify__toast {
+    .Toastify__toast{
       color: #444C63;
       font-size: 16px;
       padding-left: 20px;
       line-height: 20px;
-      padding: 0px;
-      /* padding-top: 25px; */
-      width: 300px;
       font-weight: 400;
-      margin-left: 25px !important;
+      margin: 0 auto;
+    
     }
+    .Toastify__toast-container {
+      width: 100vw;
+      /* padding: 0; */
+      // left: 0;
+      /* margin: 0; */
+      margin-left: auto;
+      margin-right: auto;
+      right: 0;
+      max-width: 100%;
+      width: 300px;
+    }
+       
   }
 }

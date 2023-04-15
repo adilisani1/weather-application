@@ -12,6 +12,11 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
     const [formattedDate, setFormattedDate] = useState('');
     const [weekday, setWeekday] = useState('');
 
+    const temp = weatherData?.temp;
+    const feelsLike = weatherData?.feels_like;
+    const parsedTemp = typeof temp === 'number' ? parseInt(temp.toFixed()) : '20';
+    const parsedFeelTemp = typeof feelsLike === 'number' ? parseInt(feelsLike.toFixed()) : '18';
+
     useEffect(() => {
         const timer = setTimeout(() => {
             const date = new Date();
@@ -72,10 +77,10 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                             <div className="weather-card">
                                 <div className="weather-card-body">
                                     <div className="weather-deg-info">
-                                        <span className="deg">{parseInt(weatherData.temp?.toFixed())}°</span>
+                                        <span className="deg">{parsedTemp}°</span>
                                         <p className="weather-main-status mb-0">{weatherData.main}</p>
                                         <p className="info mb-0">{weatherData.description}</p>
-                                        <p className="real-feel mb-0">RealFeel®: <span className="value">{parseInt(weatherData?.feels_like?.toFixed(2))}°</span> </p>
+                                        <p className="real-feel mb-0">RealFeel®: <span className="value">{parsedFeelTemp}°</span> </p>
                                     </div>
                                     <div className="head-icon-img">
                                         <img

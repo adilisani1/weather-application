@@ -125,6 +125,34 @@ function App() {
     getWeatherData();
   }, [searchInput, longitude, latitude, units]);
 
+  // useEffect(() => {
+  //   const successCallback = (position) => {
+  //     setLatitude(position.coords.latitude);
+  //     setLongitude(position.coords.longitude);
+  //     setHasLocationAccess(true);
+  //     setLoading(false);
+  //   };
+  //   const errorCallback = () => {
+  //     setLatitude(37.7749);
+  //     setLongitude(-122.4194);
+  //     setHasLocationAccess(true);
+  //     setLoading(false);
+  //   };
+  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+  // }, []);
+
+
+  // useEffect(() => {
+  //   let timeoutId;
+  //   if (latitude && longitude) {
+  //     timeoutId = setTimeout(() => {
+  //       getWeatherData();
+  //     }, 0);
+
+  //   }
+  //   return () => clearTimeout(timeoutId);
+
+  // }, [searchInput, units]);
   useEffect(() => {
     const successCallback = (position) => {
       setLatitude(position.coords.latitude);
@@ -138,9 +166,21 @@ function App() {
       setHasLocationAccess(true);
       setLoading(false);
     };
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  }, []);
 
+    const askForLocationAccess = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          successCallback,
+          errorCallback,
+          { enableHighAccuracy: true });
+      } else {
+        alert("Geolocation is not supported in your environment");
+      }
+    };
+
+
+    askForLocationAccess();
+  }, []);
 
   useEffect(() => {
     let timeoutId;
@@ -148,12 +188,9 @@ function App() {
       timeoutId = setTimeout(() => {
         getWeatherData();
       }, 0);
-
     }
     return () => clearTimeout(timeoutId);
-
   }, [searchInput, units]);
-
 
 
   const calculateTime = (timezone) => {
@@ -233,7 +270,7 @@ function App() {
         break;
       }
       default: {
-        setWeatherState("");
+        setWeatherState(sunny);
       }
     }
   }, [weatherData]);
@@ -275,7 +312,7 @@ function App() {
         }
       }
       default: {
-        return null;
+        return heavyrain;
       }
     }
   };

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
 import Header from "./component/Header/Header";
 import Weather from "./component/Weather/Weather";
-
-import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import clear from "./image/clear.svg";
 import cloud from "./image/cloud.svg";
 import overcast from "./image/overcast.svg";
@@ -38,6 +38,45 @@ function App() {
 
   const [forecast, setForecast] = useState([])
 
+  const infoWeather = () => toast.info("Fetching weather data ", {
+    toastId: 'info1',
+    position: "top-right",
+    autoClose: 2000,
+    pauseOnHover: false,
+
+  });
+
+  const geoLocationErr = () => toast.error("Geolocation is not supported in your environment ", {
+    toastId: 'info1',
+    position: "top-right",
+    autoClose: 2000,
+    pauseOnHover: false,
+
+  });
+  const cityErr = () => toast.error("Location not updated, Please search city manually", {
+    toastId: 'info1',
+    position: "top-right",
+    autoClose: 3000,
+    pauseOnHover: false,
+
+  });
+
+
+  const notify = () => toast.success("Successfully getting weather information", {
+    toastId: "notify1",
+    position: "top-right",
+    autoClose: 2000,
+    pauseOnHover: false
+  });
+
+  const errInfo = () => toast.error("Error! please type correct city name.", {
+    toastId: 'error1',
+    position: "top-right",
+    autoClose: 3000,
+    pauseOnHover: false,
+
+  });
+
 
   const themeHandler = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -67,7 +106,6 @@ function App() {
       );
 
       const data = await response.json();
-      console.log(data);
 
       const { main, description } = data.weather[0];
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } = data.main;
@@ -83,6 +121,10 @@ function App() {
       //5 day forecast
       const forecastData = await forecastResponse.json();
       const { list } = forecastData
+
+      //error 
+      const err = data.message
+
 
       const uniqueDates = new Set();
       const filteredForecast = list.filter((item) => {
@@ -111,48 +153,28 @@ function App() {
         country,
         visibility,
         speed,
-        all
+        all,
+        err
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
+      infoWeather()
+
     } catch (e) {
-      console.log(e);
+      errInfo();
     }
   }
 
-
   useEffect(() => {
-    getWeatherData();
-  }, [searchInput, longitude, latitude, units]);
+    if (weatherData && weatherData.err) {
+      errInfo();
+    } else if (weatherData && !weatherData.err) {
+      notify();
+    } else {
+      getWeatherData();
+    }
+  }, [longitude, latitude, units, weatherData, searchInput]);
 
-  // useEffect(() => {
-  //   const successCallback = (position) => {
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //     setHasLocationAccess(true);
-  //     setLoading(false);
-  //   };
-  //   const errorCallback = () => {
-  //     setLatitude(37.7749);
-  //     setLongitude(-122.4194);
-  //     setHasLocationAccess(true);
-  //     setLoading(false);
-  //   };
-  //   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-  // }, []);
-
-
-  // useEffect(() => {
-  //   let timeoutId;
-  //   if (latitude && longitude) {
-  //     timeoutId = setTimeout(() => {
-  //       getWeatherData();
-  //     }, 0);
-
-  //   }
-  //   return () => clearTimeout(timeoutId);
-
-  // }, [searchInput, units]);
   useEffect(() => {
     const successCallback = (position) => {
       setLatitude(position.coords.latitude);
@@ -161,6 +183,7 @@ function App() {
       setLoading(false);
     };
     const errorCallback = () => {
+      cityErr()
       setLatitude(37.7749);
       setLongitude(-122.4194);
       setHasLocationAccess(true);
@@ -174,7 +197,7 @@ function App() {
           errorCallback,
           { enableHighAccuracy: true });
       } else {
-        alert("Geolocation is not supported in your environment");
+        geoLocationErr()
       }
     };
 
@@ -182,15 +205,17 @@ function App() {
     askForLocationAccess();
   }, []);
 
+
   useEffect(() => {
     let timeoutId;
     if (latitude && longitude) {
       timeoutId = setTimeout(() => {
         getWeatherData();
-      }, 0);
+      }, 1000);
     }
+
     return () => clearTimeout(timeoutId);
-  }, [searchInput, units]);
+  }, [searchInput, units, latitude, longitude]);
 
 
   const calculateTime = (timezone) => {
@@ -318,7 +343,13 @@ function App() {
   };
 
 
+  // if (!weatherData) {
+  //   errInfo()
+  // }
+  // else {
+  //   notify();
 
+  // }
   if (!hasLocationAccess) {
     return <div><Loading /></div>;
   }
@@ -348,6 +379,8 @@ function App() {
         forecast={forecast}
         getWeatherIcon={getWeatherIcon}
       />
+
+
     </div>
   );
 }

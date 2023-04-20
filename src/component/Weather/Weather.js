@@ -102,7 +102,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
             <div className="container">
                 <div className="row mt-5 row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-6 row-cols-xxl-6 text-center align-items-center d-flex justify-content-center">
 
-                    {forecast?.slice(0, 6).map((item) => {
+                    {forecast?.slice(0, 6).map((item, index) => {
 
                         const date = new Date(item.dt_txt);
                         const weekday = date.toLocaleDateString('en-US', { weekday: 'short' })
@@ -112,7 +112,7 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                         const weatherIcon = getWeatherIcon(main, description)
 
                         return (
-                            <div className=" img-card">
+                            <div className=" img-card" key={index}>
                                 <div className="forecast-card ">
                                     <div className="card-body">
                                         <h5 className="day">{`${day} ${weekday}`} </h5>

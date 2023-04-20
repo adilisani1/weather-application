@@ -6,10 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) => {
 
     const [inputVal, setInputVal] = useState("");
-    const notify = () => toast("Weather in " + inputVal, {
-        position: "top-center",
-        autoClose: 3000,
-    });
+
 
     const handleUnitToggle = (e) => {
         const selectedUnit = e.currentTarget.name
@@ -18,14 +15,19 @@ const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) 
 
     const handleWeatherDataFetch = (e) => {
         e.preventDefault();
+
+        if (inputVal === "") return
         if (inputVal !== "") setSearchInput(inputVal);
         setInputVal("")
-        notify()
+
+
     };
 
     const handleKeyPress = (e) => {
         if (e.keyCode === 13) {
             handleWeatherDataFetch(e);
+        } else {
+            return e.keyCode === 0
         }
     };
 

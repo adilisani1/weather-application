@@ -47,14 +47,14 @@ function App() {
   });
 
   const geoLocationErr = () => toast.error("Geolocation is not supported in your environment ", {
-    toastId: 'info1',
+    toastId: 'error2',
     position: "top-right",
     autoClose: 2000,
     pauseOnHover: false,
 
   });
   const cityErr = () => toast.error("Location not updated, Please search city manually", {
-    toastId: 'info1',
+    toastId: 'error3',
     position: "top-right",
     autoClose: 3000,
     pauseOnHover: false,
@@ -69,7 +69,7 @@ function App() {
     pauseOnHover: false
   });
 
-  const errInfo = () => toast.error("Error! please type correct city name.", {
+  const errInfo = () => toast.error("Error! please type the correct city name.", {
     toastId: 'error1',
     position: "top-right",
     autoClose: 3000,
@@ -107,6 +107,9 @@ function App() {
 
       const data = await response.json();
 
+      //error 
+      const err = data.message
+
       const { main, description } = data.weather[0];
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } = data.main;
       const { sunrise, sunset, country } = data.sys;
@@ -121,9 +124,6 @@ function App() {
       //5 day forecast
       const forecastData = await forecastResponse.json();
       const { list } = forecastData
-
-      //error 
-      const err = data.message
 
 
       const uniqueDates = new Set();
@@ -158,7 +158,7 @@ function App() {
       };
       setWeatherData(weatherInfo);
       setForecast(filteredForecast);
-      infoWeather()
+      notify()
 
     } catch (e) {
       errInfo();
@@ -169,11 +169,11 @@ function App() {
     if (weatherData && weatherData.err) {
       errInfo();
     } else if (weatherData && !weatherData.err) {
-      notify();
+      infoWeather();
     } else {
       getWeatherData();
     }
-  }, [longitude, latitude, units, weatherData, searchInput]);
+  }, [longitude, latitude, units, searchInput, weatherData, weatherData.err]);
 
   useEffect(() => {
     const successCallback = (position) => {
@@ -211,6 +211,7 @@ function App() {
     if (latitude && longitude) {
       timeoutId = setTimeout(() => {
         getWeatherData();
+
       }, 1000);
     }
 
@@ -342,14 +343,6 @@ function App() {
     }
   };
 
-
-  // if (!weatherData) {
-  //   errInfo()
-  // }
-  // else {
-  //   notify();
-
-  // }
   if (!hasLocationAccess) {
     return <div><Loading /></div>;
   }
@@ -360,28 +353,32 @@ function App() {
   }
 
   return (
-    <div className="wrapper dark" >
+    <>
 
-      <Header
-        themeHandler={themeHandler}
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        getWeatherData={getWeatherData}
-        weatherData={weatherData}
-        setUnits={setUnits}
-        units={units}
+      <div className="wrapper dark" >
 
-      />
-      <Weather
-        time={time}
-        weatherData={weatherData}
-        weatherState={weatherState}
-        forecast={forecast}
-        getWeatherIcon={getWeatherIcon}
-      />
+        <Header
+          themeHandler={themeHandler}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          getWeatherData={getWeatherData}
+          weatherData={weatherData}
+          setUnits={setUnits}
+          units={units}
 
+        />
+        <Weather
+          time={time}
+          weatherData={weatherData}
+          weatherState={weatherState}
+          forecast={forecast}
+          getWeatherIcon={getWeatherIcon}
+        />
+        <ToastContainer />
 
-    </div>
+      </div>
+
+    </>
   );
 }
 

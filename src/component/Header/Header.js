@@ -77,7 +77,7 @@ const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) 
                 </div>
             </div>
 
-            <ToastContainer />
+
         </header >
         // </div >
     );

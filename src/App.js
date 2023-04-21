@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
-import Header from "./component/Header/Header";
-import Weather from "./component/Weather/Weather";
+import Header from "./components/Header/Header";
+import Weather from "./components/Weather/Weather";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import clear from "./image/clear.svg";
@@ -13,22 +13,28 @@ import heavyrain from './image/heavy-rain.svg';
 import lightrain from './image/light-rain.svg';
 import smoke from './image/smoke.png';
 import snow from './image/snow.svg';
-import haze from './image/haze.png';
-import thunderstorm from "./image/thunderstorm.svg"
-import drizzle from "./image/drizzle.svg";
+// import haze from './image/haze.png';
+// import thunderstorm from "./image/thunderstorm.svg"
+// import drizzle from "./image/drizzle.svg";
 import fewClouds from './image/few-clouds.svg';
+import fewNightClouds from './image/few-night-clouds.svg';
 import brokenClouds from "./image/broken-clouds.svg";
+import brokenNightClouds from './image/broken-night-clouds.svg';
 import scatteredClouds from "./image/scattered-clouds.svg";
-import Loading from './component/Loading/Loading';
+import Loading from './components/Loading/Loading';
 import './App.scss';
+import { WeatherIcons } from './components/WeatherIcons';
 
 function App() {
+
+  const options = { hour: 'numeric', minute: 'numeric' };
+
 
   const [searchInput, setSearchInput] = useState("");
   const [units, setUnits] = useState("metric");
   const [weatherData, setWeatherData] = useState([]);
   const [weatherState, setWeatherState] = useState("");
-  const [time, setTime] = useState(new Date().toLocaleTimeString());
+  const [time, setTime] = useState(new Date().toLocaleTimeString([], options));
   const [loading, setLoading] = useState(true);
   const [hasLocationAccess, setHasLocationAccess] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -230,93 +236,36 @@ function App() {
     if (weatherData && typeof weatherData.timezone === 'number') {
       const intervalId = setInterval(() => {
         setTime(calculateTime(weatherData.timezone));
-      }, 0);
+      }, 800);
       return () => clearInterval(intervalId);
     }
   }, [weatherData]);
 
-  useEffect(() => {
-    switch (weatherData.main) {
-      case "Clear": {
-        const date = new Date(Date.now() + weatherData.timezone);
-        const hours = date.getUTCHours();
-        setWeatherState(hours >= 6 && hours <= 18 ? sunny : clear);
-        break;
-      }
-      case "Clouds": {
-        if (weatherData.description === "overcast clouds") {
-          setWeatherState(overcast);
-        }
-        else if (weatherData.description === "few clouds") {
-          setWeatherState(fewClouds);
-        }
-        else if (weatherData.description === "scattered clouds") {
-          setWeatherState(scatteredClouds);
-        }
-        else if (weatherData.description === "broken clouds") {
-          setWeatherState(brokenClouds);
-        }
-        else {
-          setWeatherState(cloud);
-        }
-        break;
-      }
-      case "Smoke": {
-        setWeatherState(smoke);
-        break;
-      }
-      case "Snow": {
-        setWeatherState(snow);
-        break;
-      }
-      case "Thunderstorm": {
-        setWeatherState(thunderstorm);
-        break;
-      }
-      case "Haze": {
-        setWeatherState(haze);
-        break;
-      }
-      case "Drizzle": {
-        setWeatherState(drizzle);
-        break;
-      }
-      case "Mist": {
-        setWeatherState(haze);
-        break;
-      }
-      case "Rain": {
-        if (weatherData.description === "light rain") {
-          setWeatherState(lightrain);
-        } else if (weatherData.description === "moderate rain") {
-          setWeatherState(moderaterain);
-        } else {
-          setWeatherState(heavyrain);
-        }
-        break;
-      }
-      default: {
-        setWeatherState(sunny);
-      }
-    }
-  }, [weatherData]);
 
-  //Forecast 6 days
+  //~Forecast Icons
   const getWeatherIcon = (main, description) => {
+
+    const date = new Date(Date.now() + weatherData.timezone);
+    const hours = date.getUTCHours();
+
     switch (main) {
       case "Clear": {
-        return sunny;
+
+        return hours >= 6 && hours <= 18 ? sunny : clear;
       }
+
       case "Clouds": {
+
         if (description === "overcast clouds") {
           return overcast;
         } else if (description === "broken clouds") {
-          return brokenClouds;
+          return hours >= 6 && hours <= 18 ? brokenClouds : brokenNightClouds;
         } else if (description === "scattered clouds") {
           return scatteredClouds;
         }
         else if (description === "few clouds") {
-          return fewClouds;
+          return hours >= 6 && hours <= 18 ? fewClouds : fewNightClouds;
+
         }
         else {
           return cloud;
@@ -374,6 +323,11 @@ function App() {
           forecast={forecast}
           getWeatherIcon={getWeatherIcon}
         />
+
+        <WeatherIcons
+          weatherData={weatherData}
+          setWeatherState={setWeatherState} />
+
         <ToastContainer />
 
       </div>

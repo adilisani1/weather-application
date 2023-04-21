@@ -68,8 +68,11 @@ const Weather = ({ weatherData, time, weatherState, forecast, getWeatherIcon }) 
                         <div className="col-md-6 col-sm-12 col-12 mt-sm-5">
                             <div className="weather-location-top">
                                 <div className="loc">
+                                    <div>
+                                        <ion-icon name="location-sharp"></ion-icon>
+                                    </div>
                                     <span className="location-name">
-                                        {weatherData.city}<span> {weatherData.country}</span>
+                                        {weatherData.city} <span>{weatherData.country}</span>
                                     </span>
                                 </div>
                             </div>

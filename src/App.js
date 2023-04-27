@@ -21,7 +21,7 @@ import fewNightClouds from './image/few-night-clouds.svg';
 import brokenClouds from "./image/broken-clouds.svg";
 import brokenNightClouds from './image/broken-night-clouds.svg';
 import scatteredClouds from "./image/scattered-clouds.svg";
-import Loading from './components/Loading/Loading';
+// import Loading from './components/Loading/Loading';
 import './App.scss';
 import { WeatherIcons } from './components/WeatherIcons';
 import { Location } from './components/Location';
@@ -163,7 +163,10 @@ function App() {
     } else if (weatherData && !weatherData.err) {
       infoWeather();
     } else {
-      getWeatherData();
+      setTimeout(() => {
+        getWeatherData();
+      }, 2000);
+      // getWeatherData();
     }
   }, [longitude, latitude, units, searchInput, weatherData, weatherData.err, getWeatherData]);
 

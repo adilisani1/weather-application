@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import clear from "../image/clear.svg";
 import cloud from "../image/cloud.svg";
@@ -10,7 +10,7 @@ import lightrain from '../image/light-rain.svg';
 import smoke from '../image/smoke.png';
 import snow from '../image/snow.svg';
 import haze from '../image/haze.png';
-import thunderstorm from "../image/thunderstorm.svg"
+import thunderstorm from "../image/thunderstorm.png"
 import drizzle from "../image/drizzle.svg";
 import fewClouds from '../image/few-clouds.svg';
 import fewNightClouds from '../image/few-night-clouds.svg';

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { apiKey } from './weatherAPI/apiKey';
 import Header from "./components/Header/Header";
 import Weather from "./components/Weather/Weather";
@@ -14,7 +14,7 @@ import lightrain from './image/light-rain.svg';
 import smoke from './image/smoke.png';
 import snow from './image/snow.svg';
 // import haze from './image/haze.png';
-// import thunderstorm from "./image/thunderstorm.svg"
+// import thunderstorm from "./image/thunderstorm.png"
 // import drizzle from "./image/drizzle.svg";
 import fewClouds from './image/few-clouds.svg';
 import fewNightClouds from './image/few-night-clouds.svg';
@@ -24,6 +24,8 @@ import scatteredClouds from "./image/scattered-clouds.svg";
 import Loading from './components/Loading/Loading';
 import './App.scss';
 import { WeatherIcons } from './components/WeatherIcons';
+import { Location } from './components/Location';
+
 
 function App() {
 
@@ -35,8 +37,7 @@ function App() {
   const [weatherData, setWeatherData] = useState([]);
   const [weatherState, setWeatherState] = useState("");
   const [time, setTime] = useState(new Date().toLocaleTimeString([], options));
-  const [loading, setLoading] = useState(true);
-  const [hasLocationAccess, setHasLocationAccess] = useState(false);
+
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   const [latitude, setLatitude] = useState(null);
@@ -48,21 +49,6 @@ function App() {
     toastId: 'info1',
     position: "top-right",
     autoClose: 2000,
-    pauseOnHover: false,
-
-  });
-
-  const geoLocationErr = () => toast.error("Geolocation is not supported in your environment ", {
-    toastId: 'error2',
-    position: "top-right",
-    autoClose: 2000,
-    pauseOnHover: false,
-
-  });
-  const cityErr = () => toast.error("Location not updated, Please search city manually", {
-    toastId: 'error3',
-    position: "top-right",
-    autoClose: 3000,
     pauseOnHover: false,
 
   });
@@ -100,8 +86,7 @@ function App() {
     }
   }, [isDarkTheme]);
 
-
-  const getWeatherData = async () => {
+  const getWeatherData = useCallback(async () => {
     try {
 
       const response = await fetch(
@@ -113,14 +98,14 @@ function App() {
 
       const data = await response.json();
 
-      //error 
+      //error
       const err = data.message
 
+      //Weather Info
       const { main, description } = data.weather[0];
       const { humidity, temp, feels_like, pressure, temp_min, temp_max } = data.main;
       const { sunrise, sunset, country } = data.sys;
       const timezone = data.timezone * 1000;
-      // const timezone = data.timezone;
       const city = data.name;
       const date = data.dt;
       const visibility = data.visibility;
@@ -169,7 +154,8 @@ function App() {
     } catch (e) {
       errInfo();
     }
-  }
+  }, [longitude, latitude, units, searchInput]);
+
 
   useEffect(() => {
     if (weatherData && weatherData.err) {
@@ -179,51 +165,7 @@ function App() {
     } else {
       getWeatherData();
     }
-  }, [longitude, latitude, units, searchInput, weatherData, weatherData.err]);
-
-  useEffect(() => {
-    const successCallback = (position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-      setHasLocationAccess(true);
-      setLoading(false);
-    };
-    const errorCallback = () => {
-      cityErr()
-      setLatitude(37.7749);
-      setLongitude(-122.4194);
-      setHasLocationAccess(true);
-      setLoading(false);
-    };
-
-    const askForLocationAccess = () => {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          successCallback,
-          errorCallback,
-          { enableHighAccuracy: true });
-      } else {
-        geoLocationErr()
-      }
-    };
-
-
-    askForLocationAccess();
-  }, []);
-
-
-  useEffect(() => {
-    let timeoutId;
-    if (latitude && longitude) {
-      timeoutId = setTimeout(() => {
-        getWeatherData();
-
-      }, 1000);
-    }
-
-    return () => clearTimeout(timeoutId);
-  }, [searchInput, units, latitude, longitude]);
-
+  }, [longitude, latitude, units, searchInput, weatherData, weatherData.err, getWeatherData]);
 
   const calculateTime = (timezone) => {
     const date = new Date(Date.now() + timezone);
@@ -292,18 +234,9 @@ function App() {
     }
   };
 
-  if (!hasLocationAccess) {
-    return <div><Loading /></div>;
-  }
-
-
-  if (loading) {
-    return <div><Loading /></div>;
-  }
 
   return (
     <>
-
       <div className="wrapper dark" >
 
         <Header
@@ -327,6 +260,16 @@ function App() {
         <WeatherIcons
           weatherData={weatherData}
           setWeatherState={setWeatherState} />
+
+        <Location
+          searchInput={searchInput}
+          units={units}
+          getWeatherData={getWeatherData}
+          latitude={latitude}
+          longitude={longitude}
+          setLatitude={setLatitude}
+          setLongitude={setLongitude}
+        />
 
         <ToastContainer />
 

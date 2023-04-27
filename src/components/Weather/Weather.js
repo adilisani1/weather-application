@@ -8,8 +8,7 @@ import dropsIcon from '../../image/dropp.png';
 import pressureIcon from '../../image/thermometer.png';
 import visibilityIcon from '../../image/visibility.png';
 import cloudComputing from "../../image/cloud-computing.png"
-// import ForecastIcons from "../ForecastIcons";
-// import { ForecastCard } from "../ForecastCard";
+
 
 const Weather = (props) => {
 
@@ -22,6 +21,12 @@ const Weather = (props) => {
     const feelsLike = weatherData?.feels_like;
     const parsedTemp = typeof temp === 'number' ? parseInt(temp.toFixed()) : '20';
     const parsedFeelTemp = typeof feelsLike === 'number' ? parseInt(feelsLike.toFixed()) : '18';
+
+    // <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
+    const sunRi = new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+    const sunR = sunRi === "Invalid Date" ? "--" : sunRi;
+    const sunSe = new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+    const sunS = sunSe === "Invalid Date" ? "--" : sunSe;
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -147,8 +152,6 @@ const Weather = (props) => {
 
                     })}
 
-
-
                 </div>
             </div>
 
@@ -196,7 +199,8 @@ const Weather = (props) => {
 
                                 <div className="rowClass">
                                     <div className="">
-                                        <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
+                                        {/* <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1> */}
+                                        <h1>{sunR}</h1>
                                         <p>-1m 46s</p>
                                     </div>
                                     <div className="day-night-icons">
@@ -209,7 +213,8 @@ const Weather = (props) => {
                                 </div>
                                 <div className="rowClass">
                                     <div className="">
-                                        <h1>{new Date(weatherData.sunset * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
+                                        {/* <h1>{new Date(weatherData.sunset * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1> */}
+                                        <h1>{sunS}</h1>
                                         <p>-1m 46s</p>
                                     </div>
                                     <div className="day-night-icons">

@@ -18,14 +18,14 @@ export function Location({
 
     const geoLocationErr = () => toast.error("Geolocation is not supported in your environment ", {
         toastId: 'error2',
-        position: "top-right",
+        // position: "top-right",
         autoClose: 2000,
         pauseOnHover: false,
 
     });
     const cityErr = () => toast.error("Location Denied, Default location updating", {
         toastId: 'error3',
-        position: "top-right",
+        // position: "top-right",
         autoClose: 3000,
         pauseOnHover: false,
 

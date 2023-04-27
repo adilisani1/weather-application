@@ -47,7 +47,7 @@ function App() {
 
   const infoWeather = () => toast.info("Fetching weather data ", {
     toastId: 'info1',
-    position: "top-right",
+    // position: "top-right",
     autoClose: 2000,
     pauseOnHover: false,
 
@@ -56,14 +56,14 @@ function App() {
 
   const notify = () => toast.success("Successfully getting weather information", {
     toastId: "notify1",
-    position: "top-right",
+    // position: "top-right",
     autoClose: 2000,
     pauseOnHover: false
   });
 
   const errInfo = () => toast.error("Error! please type the correct city name.", {
     toastId: 'error1',
-    position: "top-right",
+    // position: "top-right",
     autoClose: 3000,
     pauseOnHover: false,
 

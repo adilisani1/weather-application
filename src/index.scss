@@ -1,13 +1,10 @@
-// @import url('http://fonts.cdnfonts.com/css/gilroy-bold');
-@import url("https://db.onlinewebfonts.com/c/0a2bda6a452a0e2e10770717bac25392?family=AgudaBlackUnicaseW01-Rg");
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
 
 @font-face {
   font-family: "AgudaBlackUnicaseW01-Rg";
-  src: url("//db.onlinewebfonts.com/t/0a2bda6a452a0e2e10770717bac25392.woff2") format("woff"),
+  src: local("AgudaBlackUnicaseW01-Rg"),
+    url("../public/fonts/0a2bda6a452a0e2e10770717bac25392.ttf") format("truetype");
 }
-
-@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
-
 
 :root {
   --Gilroy: 'Gilroy', sans-serif;

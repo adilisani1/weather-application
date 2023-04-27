@@ -163,9 +163,9 @@ function App() {
     } else if (weatherData && !weatherData.err) {
       infoWeather();
     } else {
-      setTimeout(() => {
-        getWeatherData();
-      }, 2000);
+
+      getWeatherData();
+
       // getWeatherData();
     }
   }, [longitude, latitude, units, searchInput, weatherData, weatherData.err, getWeatherData]);
@@ -181,7 +181,7 @@ function App() {
     if (weatherData && typeof weatherData.timezone === 'number') {
       const intervalId = setInterval(() => {
         setTime(calculateTime(weatherData.timezone));
-      }, 800);
+      }, 0);
       return () => clearInterval(intervalId);
     }
   }, [weatherData]);

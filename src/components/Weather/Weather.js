@@ -22,6 +22,11 @@ const Weather = (props) => {
     const parsedTemp = typeof temp === 'number' ? parseInt(temp.toFixed()) : '20';
     const parsedFeelTemp = typeof feelsLike === 'number' ? parseInt(feelsLike.toFixed()) : '18';
 
+    // { parseFloat(weatherData.speed * 3.6).toFixed(1) }
+
+    const wSpeed = weatherData.speed * 3.6;
+
+
     // <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
     const sunRi = new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
     const sunR = sunRi === "Invalid Date" ? "--" : sunRi;
@@ -183,7 +188,7 @@ const Weather = (props) => {
                                 <h5 className="weather-condition-title">Wind Status</h5>
                                 <div className="status-flex">
                                     <h1 className="wind-speed">
-                                        {parseFloat(weatherData.speed * 3.6).toFixed(1)}{" "}
+                                        {parseFloat(weatherData.speed * 3.6).toFixed(1)}
                                         <span className="km">km/h</span>
                                     </h1>
                                     <img src={windyIcon} alt="wind icon" />

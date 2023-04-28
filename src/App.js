@@ -237,7 +237,6 @@ function App() {
     }
   };
 
-
   return (
     <>
       <div className="wrapper dark" >
@@ -264,20 +263,19 @@ function App() {
           weatherData={weatherData}
           setWeatherState={setWeatherState} />
 
-        <Location
-          searchInput={searchInput}
-          units={units}
-          getWeatherData={getWeatherData}
-          latitude={latitude}
-          longitude={longitude}
-          setLatitude={setLatitude}
-          setLongitude={setLongitude}
-        />
 
         <ToastContainer />
 
       </div>
-
+      <Location
+        searchInput={searchInput}
+        units={units}
+        getWeatherData={getWeatherData}
+        latitude={latitude}
+        longitude={longitude}
+        setLatitude={setLatitude}
+        setLongitude={setLongitude}
+      />
     </>
   );
 }

@@ -35,7 +35,7 @@ const Weather = (props) => {
     // <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
     const sunRi = new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
     const sunR = sunRi === "Invalid Date" ? "--" : sunRi;
-    const sunSe = new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+    const sunSe = new Date(weatherData.sunset * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
     const sunS = sunSe === "Invalid Date" ? "--" : sunSe;
 
     useEffect(() => {

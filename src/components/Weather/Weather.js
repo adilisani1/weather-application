@@ -24,13 +24,21 @@ const Weather = (props) => {
 
     const windSpeed = weatherData.speed;
     const wSpeed = windSpeed ? parseFloat(weatherData.speed * 3.6).toFixed(1) : "--"
-
-
     { (weatherData.visibility / 1000).toFixed(1) }
 
     const visibilityValue = weatherData.visibility;
     const visibility = visibilityValue ? (weatherData.visibility / 1000).toFixed(1) : "--"
 
+    const now = new Date();
+    const nextSunrise = new Date(weatherData.sunrise * 1000);
+    const nextSunset = new Date(weatherData.sunset * 1000);
+
+    const timeUntilNextEvent = (nextEvent) => {
+        const diff = nextEvent.getTime() - now.getTime();
+        const minutes = Math.floor(diff / 1000 / 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        return `${minutes}m ${seconds}s`;
+    }
 
     // <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1>
     const sunRi = new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
@@ -208,10 +216,10 @@ const Weather = (props) => {
                                 <h5 className="weather-condition-title">Sunrise & Sunset</h5>
 
                                 <div className="rowClass">
-                                    <div className="">
+                                    <div className="sunSR">
                                         {/* <h1>{new Date(weatherData.sunrise * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1> */}
                                         <h1>{sunR}</h1>
-                                        <p>-1m 46s</p>
+                                        <p>{timeUntilNextEvent(nextSunrise)}</p>
                                     </div>
                                     <div className="day-night-icons">
                                         <img
@@ -222,10 +230,10 @@ const Weather = (props) => {
                                     </div>
                                 </div>
                                 <div className="rowClass">
-                                    <div className="">
+                                    <div className="sunSR">
                                         {/* <h1>{new Date(weatherData.sunset * 1000).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}</h1> */}
                                         <h1>{sunS}</h1>
-                                        <p>-1m 46s</p>
+                                        <p>{timeUntilNextEvent(nextSunset)}</p>
                                     </div>
                                     <div className="day-night-icons">
                                         <img

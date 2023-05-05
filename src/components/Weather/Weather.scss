@@ -448,6 +448,31 @@
         justify-content: space-between;
         width: 100%;
 
+        .sunSR {
+
+          h1 {
+            font-size: 3rem;
+            margin-bottom: 0;
+            font-family: var(--Gilroy);
+          }
+
+          p {
+            font-size: 1.4rem;
+            font-family: var(--Gilroy);
+          }
+
+
+          @media only screen and (max-width: 990px) {
+            font-size: 2.6rem;
+
+          }
+
+          @media only screen and (max-width: 767px) {
+            font-size: 2.8rem;
+          }
+        }
+
+
 
         .day-night-icons {
 
@@ -483,6 +508,14 @@
         letter-spacing: 0.9px;
         font-weight: 400;
         // color: white;
+
+        @media only screen and (max-width: 990px) {
+          font-size: 1.7rem;
+        }
+
+        @media only screen and (max-width: 767px) {
+          font-size: 1.9rem;
+        }
       }
 
       .wind-speed {
@@ -493,8 +526,12 @@
         margin: 3rem 0;
 
         @media only screen and (max-width: 990px) {
-          font-size: 2.8rem;
+          font-size: 2.6rem;
 
+        }
+
+        @media only screen and (max-width: 767px) {
+          font-size: 2.8rem;
         }
 
 

@@ -24,7 +24,6 @@ const Weather = (props) => {
 
     const windSpeed = weatherData.speed;
     const wSpeed = windSpeed ? parseFloat(weatherData.speed * 3.6).toFixed(1) : "--"
-    { (weatherData.visibility / 1000).toFixed(1) }
 
     const visibilityValue = weatherData.visibility;
     const visibility = visibilityValue ? (weatherData.visibility / 1000).toFixed(1) : "--"

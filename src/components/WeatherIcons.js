@@ -90,7 +90,7 @@ export const WeatherIcons = ({ weatherData, setWeatherState }) => {
                 setWeatherState(sunny);
             }
         }
-    }, [weatherData]);
+    }, [weatherData, setWeatherState]);
 
     return (<div></div>)
 }

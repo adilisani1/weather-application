@@ -9,29 +9,57 @@
   height: 100%;
   background-position: center center;
   background-repeat: no-repeat;
-  padding: 30px 0px 10px 0px;
-  // background-color: #101014;
+  padding: 30px 170px 10px 170px;
 
+  @media (max-width: 1440px) {
+    padding: 30px 120px 10px 120px;
+  }
 
+  @media (max-width: 1280px) {
+    padding: 30px 80px 10px 80px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 30px 40px 10px 40px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px 20px 10px 20px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 15px 15px 10px 15px;
+  }
 
   .time-date {
-    // color: var(--white);
-    text-align: center;
+    text-align: left;
     margin-bottom: 2rem;
+    margin-left: 10px;
 
     @media only screen and (max-width: 767px) {
-      margin-top: 40px;
+      margin-top: 10px;
+      margin-left: 0px;
+      text-align: center;
     }
 
     .time {
       font-size: 9rem;
-      // font-family: var(--AgudaBlackUnicase);
       font-family: "AgudaBlackUnicaseW01-Rg";
 
+      @media only screen and (max-width: 1024px) {
+        font-size: 7.5rem;
+      }
+
+      @media only screen and (max-width: 767px) {
+        font-size: 6.5rem;
+      }
+
       @media only screen and (max-width: 575px) {
-
         font-size: 5rem;
+      }
 
+      @media only screen and (max-width: 360px) {
+        font-size: 4rem;
       }
     }
 
@@ -40,21 +68,22 @@
       font-size: 2rem;
       font-family: var(--Gilroy);
       letter-spacing: 0.7px;
+
+      @media only screen and (max-width: 575px) {
+        font-size: 1.6rem;
+      }
     }
   }
 
   .weather-location-top {
     @media only screen and (max-width: 575px) {
-      width: 350px;
-      max-width: 100%;
+      width: 100%;
+      // max-width: 380px;
       margin: 0 auto;
-
     }
 
     @media only screen and (max-width: 360px) {
-      width: 300px;
-
-
+      // max-width: 300px;
     }
 
     .loc {
@@ -65,7 +94,6 @@
       background: linear-gradient(135deg,
           rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0));
-      // backdrop-filter: blur(10px);
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       display: flex;
       align-items: center;
@@ -83,7 +111,6 @@
         }
       }
     }
-
   }
 
   .weather-card {
@@ -99,51 +126,55 @@
     max-width: 100%;
 
     @media only screen and (max-width: 575px) {
-      width: 350px;
+      width: 100%;
+      // max-width: 380px;
       margin: 0 auto;
-
     }
 
     @media only screen and (max-width: 360px) {
-      width: 300px;
-
-
+      // max-width: 300px;
     }
-
-
-    // @media only screen and (max-width: 575px) {
-    //   width: 300px;
-    //  }
 
     .weather-card-body {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      height: 250px;
-      padding: .4rem 4rem 1rem 4rem;
+      min-height: 220px;
+      height: auto;
+      padding: 1.5rem 4rem 1.5rem 4rem;
 
-      @media only screen and (max-width: 990px) {
-        padding: .4rem 3rem 1rem 3rem;
+      @media only screen and (max-width: 1024px) {
+        padding: 1.5rem 3rem 1.5rem 3rem;
+      }
+
+      @media only screen and (max-width: 767px) {
+        padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+        min-height: 200px;
       }
 
       @media only screen and (max-width: 575px) {
-        padding: .4rem 2rem 1rem 4rem;
+        padding: 1.5rem 2rem 1.5rem 2.5rem;
+        min-height: 180px;
       }
 
       .weather-deg-info {
         .deg {
           font-size: 6rem;
-          text-align: center;
+          text-align: left;
           margin-bottom: 0;
           font-family: "AgudaBlackUnicaseW01-Rg";
 
-          @media only screen and (max-width: 990px) {
+          @media only screen and (max-width: 1024px) {
+            font-size: 5.5rem;
+          }
+
+          @media only screen and (max-width: 767px) {
             font-size: 5rem;
           }
 
           @media only screen and (max-width: 575px) {
-            font-size: 4.5rem
+            font-size: 4.5rem;
           }
         }
 
@@ -153,9 +184,12 @@
           letter-spacing: 0.7px;
           font-weight: 550;
 
+          @media only screen and (max-width: 767px) {
+            font-size: 1.7rem;
+          }
+
           @media only screen and (max-width: 575px) {
             font-size: 1.5rem;
-
           }
         }
 
@@ -166,9 +200,7 @@
           font-weight: 300;
 
           @media only screen and (max-width: 575px) {
-
             font-size: 1.2rem;
-
           }
         }
 
@@ -180,7 +212,6 @@
 
           @media only screen and (max-width: 575px) {
             font-size: 1.2rem;
-
           }
 
           .value {
@@ -196,16 +227,20 @@
         .icon-img {
           width: 200px;
 
-          @media only screen and (max-width: 990px) {
+          @media only screen and (max-width: 1024px) {
             width: 165px;
           }
 
           @media only screen and (max-width: 767px) {
-            width: 200px;
+            width: 150px;
           }
 
           @media only screen and (max-width: 575px) {
-            width: 130px;
+            width: 120px;
+          }
+
+          @media only screen and (max-width: 360px) {
+            width: 100px;
           }
         }
       }
@@ -213,35 +248,78 @@
   }
 }
 
+.forecast-section {
+  padding: 0 170px;
+
+  @media (max-width: 1440px) {
+    padding: 0 120px;
+  }
+
+  @media (max-width: 1280px) {
+    padding: 0 80px;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 0 15px;
+  }
+}
+
+.weather-info-section {
+  padding: 0 170px;
+  padding-bottom: 3rem;
+
+  @media (max-width: 1440px) {
+    padding: 0 120px 3rem;
+  }
+
+  @media (max-width: 1280px) {
+    padding: 0 80px 3rem;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 40px 3rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 20px 3rem;
+  }
+
+  @media (max-width: 575px) {
+    padding: 0 15px 2rem;
+  }
+
+}
+
 .img-card {
+  height: 100%;
 
   .forecast-card {
     position: relative;
-    padding: 3rem 0rem;
-    height: 230px;
-    width: 300px;
+    padding: 1.8rem 1rem;
+    height: auto;
+    min-height: 195px;
+    width: 100%;
+    max-width: 300px;
     margin: 0 auto;
-    max-width: 100%;
 
-    @media only screen and (max-width: 1200px) {
-      //padding: 3rem 1rem;
+    @media only screen and (max-width: 767px) {
+      padding: 1.5rem 0.5rem;
+      min-height: 175px;
+      max-width: 100%;
     }
 
     @media only screen and (max-width: 575px) {
-      // width:40%;
-      // max-width:100% ;
-      // display:flex;
-      // padding: 3rem 0rem;
-      // flex-direction: column; 
-      // justify-content: center;
-      // margin : 0 auto 
-      // Your CSS rules for screen sizes between 600px and 799px
+      padding: 1.2rem 0.5rem;
+      min-height: 160px;
     }
-
-    // @media only screen and (max-width: 990px) and (max-width: 1199px) {
-    //   padding: 3rem 4rem;
-    //   // Your CSS rules for screen sizes between 990px and 1199px
-    // }
 
     &:before {
       content: "";
@@ -257,7 +335,6 @@
       box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 10%);
       z-index: -1;
       border-radius: 15px;
-
     }
 
     .icon-img {
@@ -266,31 +343,32 @@
       justify-content: center;
 
       .icons {
-        width: 70px;
+        width: 60px;
+
+        @media only screen and (max-width: 767px) {
+          width: 55px;
+        }
       }
     }
 
     .card-body {
-      padding: 1rem;
-      // color: white;
+      padding: 0.5rem 1rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
 
-      /* vertically center the text */
       .day {
         font-family: var(--Gilroy);
         letter-spacing: 1.5px;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 500;
       }
 
       .deg-feel {
         font-family: "AgudaBlackUnicaseW01-Rg";
         letter-spacing: 1.5px;
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         margin-left: 0.5rem;
-
       }
 
       .stats {
@@ -311,7 +389,6 @@
 
       p {
         margin: 0;
-        /* remove default margins */
       }
     }
 
@@ -321,14 +398,11 @@
       flex-direction: column;
       text-align: left;
 
-
-
       .weather-condition-title {
         font-size: 2rem;
         font-family: var(--Gilroy);
         letter-spacing: 0.9px;
         font-weight: 400;
-        // color: white;
       }
 
       .wind-speed {
@@ -343,29 +417,30 @@
         }
       }
 
-      .speed-text {}
     }
   }
 
   .card-collection {
-    // position: relative;
-    padding: 3rem 2rem;
-    // height: 230px;
     position: relative;
-    // padding: 3rem 0rem;
-    height: 230px;
-    // width:300px;
+    padding: 3rem 3.5rem;
+    height: 100%;
+    min-height: 220px;
     margin: 0 auto;
     max-width: 100%;
 
-
-    @media only screen and (max-width: 575px) {
-      // width: 300px;
-      height: 206px;
-      padding: 2.4rem 2rem;
+    @media only screen and (max-width: 1024px) {
+      padding: 2.5rem 3rem;
     }
 
-    // width: 300px;
+    @media only screen and (max-width: 767px) {
+      min-height: unset;
+      padding: 2rem 2.5rem;
+    }
+
+    @media only screen and (max-width: 575px) {
+      min-height: unset;
+      padding: 1.8rem 2rem;
+    }
 
     &:before {
       content: "";
@@ -400,7 +475,6 @@
       flex-direction: column;
       justify-content: center;
 
-      /* vertically center the text */
       .day {
         font-family: var(--Gilroy);
         letter-spacing: 1.5px;
@@ -419,8 +493,6 @@
         font-family: var(--Gilroy);
         font-size: 1.2rem;
         letter-spacing: 1.5px;
-
-
       }
 
       .rain-chance {
@@ -431,147 +503,115 @@
 
       p {
         margin: 0;
-        /* remove default margins */
       }
     }
 
     .weather-highlights {
-      padding: 1rem;
+      padding: 0.5rem 0;
       display: flex;
       flex-direction: column;
       text-align: left;
 
-
       .rowClass {
-        // margin-top: 0.3rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
+        margin-bottom: 0.5rem;
 
         .sunSR {
 
           h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin-bottom: 0;
             font-family: var(--Gilroy);
+
+            @media only screen and (max-width: 1024px) {
+              font-size: 2.4rem;
+            }
+
+            @media only screen and (max-width: 767px) {
+              font-size: 2.6rem;
+            }
           }
 
           p {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-family: var(--Gilroy);
-          }
-
-
-          @media only screen and (max-width: 990px) {
-            font-size: 2.6rem;
-
-          }
-
-          @media only screen and (max-width: 767px) {
-            font-size: 2.8rem;
+            margin: 0;
           }
         }
-
-
 
         .day-night-icons {
-
-          // margin-right: 2rem;
           .rise-set {
-            width: 70px;
+            width: 60px;
+
+            @media only screen and (max-width: 1024px) {
+              width: 50px;
+            }
           }
         }
-
-        // justify-content: space-between;
       }
 
       .status-flex {
         display: flex;
         align-items: center;
         justify-content: space-between;
-
+        margin: 0.5rem 0;
 
         img {
-          width: 60px;
+          width: 55px;
 
-          @media only screen and (max-width: 990px) {
-            // Your CSS rules for screen sizes between 990px and 1199px
-
-            margin-right: 0rem;
+          @media only screen and (max-width: 1024px) {
+            width: 48px;
           }
         }
       }
 
       .weather-condition-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-family: var(--Gilroy);
         letter-spacing: 0.9px;
         font-weight: 400;
-        // color: white;
+        margin-bottom: 0.5rem;
 
-        @media only screen and (max-width: 990px) {
-          font-size: 1.7rem;
+        @media only screen and (max-width: 1024px) {
+          font-size: 1.6rem;
         }
 
         @media only screen and (max-width: 767px) {
-          font-size: 1.9rem;
+          font-size: 1.7rem;
         }
       }
 
       .wind-speed {
-        font-size: 4rem;
+        font-size: 3.5rem;
         font-family: var(--Gilroy);
         font-weight: 400;
         letter-spacing: 0.9px;
-        margin: 3rem 0;
+        margin: 1rem 0 0.5rem;
 
-        @media only screen and (max-width: 990px) {
-          font-size: 2.6rem;
-
+        @media only screen and (max-width: 1024px) {
+          font-size: 3rem;
         }
 
         @media only screen and (max-width: 767px) {
-          font-size: 2.8rem;
+          font-size: 3.2rem;
+          margin: 0.5rem 0 0.3rem;
         }
 
-
         .km {
-          font-size: 2rem;
+          font-size: 1.8rem;
         }
       }
 
-      .speed-text {}
-
+      .speed-text {
+        font-size: 1.3rem;
+        font-family: var(--Gilroy);
+        letter-spacing: 0.5px;
+        opacity: 0.8;
+      }
     }
-
-
   }
 
-}
-
-
-
-// For 1200px screen and above
-@media only screen and (min-width: 1200px) {
-  // Your CSS rules for 1200px and above screens
-}
-
-// For screen sizes between 990px and 1199px
-@media only screen and (min-width: 990px) and (max-width: 1199px) {
-  // Your CSS rules for screen sizes between 990px and 1199px
-}
-
-// For screen sizes between 800px and 989px
-@media only screen and (min-width: 800px) and (max-width: 989px) {
-  // Your CSS rules for screen sizes between 800px and 989px
-}
-
-// For screen sizes between 600px and 799px
-@media only screen and (min-width: 600px) and (max-width: 799px) {
-  // Your CSS rules for screen sizes between 600px and 799px
-}
-
-// For screen sizes up to 599px
-@media only screen and (max-width: 599px) {
-  // Your CSS rules for screen sizes up to 599px
 }

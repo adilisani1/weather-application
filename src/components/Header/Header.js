@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./Header.scss";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) => {
 
     const [inputVal, setInputVal] = useState("");
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
 
     const handleUnitToggle = (e) => {
@@ -43,7 +44,8 @@ const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) 
                 </div>
             </div>
 
-            <div className="search-box fl">
+            <div className={`search-box-container${isSearchOpen ? " mobile-search-open" : ""}`}>
+                 <div className="search-box fl">
                 <ion-icon name="search-outline" class="search-icon" onClick={handleWeatherDataFetch}></ion-icon>
                 <input
                     type="text"
@@ -57,7 +59,12 @@ const Header = ({ weatherData, setUnits, units, setSearchInput, themeHandler }) 
                 />
             </div>
 
+           </div>
             <div className="right-side-values fl">
+
+                <button className="mobile-search-toggle" onClick={() => setIsSearchOpen(prev => !prev)} aria-label="Toggle search">
+                    <ion-icon name={isSearchOpen ? "close-outline" : "search-outline"}></ion-icon>
+                </button>
 
                 <div className="weather-temp">
                     <button className={`circle ${units === "metric" ? 'active' : ''}`} name="metric" onClick={handleUnitToggle}>°C</button>

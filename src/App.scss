@@ -3,35 +3,60 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 32px 0 rgba(0, 0, 0,  40%);
     // min-width: 900px;
-border-radius: 20px;
-padding: 2rem 5rem 5rem 5rem;
+// border-radius: 20px;
+// padding: 2rem 3rem 5rem 3rem;
 overflow: hidden;
 // width: 1300px;
 position: relative;
 color: white;
 
 
-
 &.dark{
-background-color: #0c0c0c;
+  background-color: #0c0c0c;
   color: white;
-   overflow-y: hidden;
-
-
-   
+  overflow-y: hidden;
 }
 &.light{
     
     overflow-y: hidden;
     background-color: #D3D4EB;
-    background-image: url("https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+        url("https://images.pexels.com/photos/35145829/pexels-photo-35145829.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1");
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
-    .header-wrap{
-            .search-box{
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-                background-color: transparent;
+    .header-wrap {
+        .mobile-search-toggle {
+            color: white;
+        }
+        .search-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+
+            input[type="text"]::placeholder {
+                color: rgba(255, 255, 255, 0.7);
             }
-       
+
+            .search-input {
+                color: white;
+            }
+
+            .search-input:-webkit-autofill,
+            .search-input:-webkit-autofill:hover,
+            .search-input:-webkit-autofill:focus,
+            .search-input:-webkit-autofill:active {
+                -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.15) inset !important;
+                -webkit-text-fill-color: #fff !important;
+            }
+
+            .search-icon {
+                color: white;
+            }
+        }
     }
     .weather-section {
         .weather-card {

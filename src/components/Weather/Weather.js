@@ -86,7 +86,7 @@ const Weather = (props) => {
         <>
             {/* Section-top */}
             <section className="weather-section">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row align-items-center justify-content-center">
                         <div className="col-md-6 col-sm-12 col-12">
                             <div className="time-date">
@@ -94,7 +94,7 @@ const Weather = (props) => {
                                 <p> {weekday} | {formattedDate} </p>
                             </div>
                         </div>
-                        <div className="col-md-6 col-sm-12 col-12 mt-sm-5">
+                        <div className="col-md-6 col-sm-12 col-12 mt-4 mt-md-0">
                             <div className="weather-location-top">
                                 <div className="loc">
                                     <div>
@@ -131,8 +131,8 @@ const Weather = (props) => {
 
 
             {/* Forecast Section */}
-            <div className="container">
-                <div className="row mt-5 row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-6 row-cols-xxl-6 text-center align-items-center d-flex justify-content-center">
+            <div className="container-fluid forecast-section">
+                <div className="row mt-4 g-3 row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-6 row-cols-xxl-6 text-center align-items-center d-flex justify-content-center">
 
                     {forecast?.slice(0, 6).map((item, index) => {
 
@@ -174,8 +174,8 @@ const Weather = (props) => {
             </div>
 
             {/* WEATHER-INFO */}
-            <div className="container">
-                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3">
+            <div className="container-fluid weather-info-section">
+                <div className="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3">
                     <div className=" img-card">
                         <div className="card-collection">
                             <div className="weather-highlights">
@@ -186,11 +186,13 @@ const Weather = (props) => {
                                     <img src={cloudComputing} alt="" />
                                 </div>
                                 <span className="speed-text">
-                                    {weatherData.all > "90" ?
-                                        "Overcast" :
-                                        weatherData.all < "1"
+                                    {weatherData.all > 90
+                                        ? "Overcast"
+                                        : weatherData.all < 1
                                             ? "No Clouds"
-                                            : ""}
+                                            : weatherData.all >= 50
+                                                ? "Mostly Cloudy"
+                                                : "Partly Cloudy"}
                                 </span>
                             </div>
                         </div>
